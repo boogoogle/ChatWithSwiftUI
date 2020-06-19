@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "avatar": "B",
+        "text" : "中午去吃什么?",
+        "pairs" : "James & Amy",
+        "timeStamp": "05-07 12:00:22"
+    },
+    {
+        "id": 11,
+        "avatar": "BC",
+        "text" : "中午去吃什么?",
+        "pairs" : "James & Amy",
+        "timeStamp": "05-07 12:00:22"
+    },
+]

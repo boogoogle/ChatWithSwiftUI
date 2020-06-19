@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LeanCloud
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // 初始化LeanCloud
+        
+        // 开启调试日志, 在 Application 初始化代码执行之前执行
+        LCApplication.logLevel = .all  // .off 关闭
+        
+        do {
+            try LCApplication.default.set(
+                id: "fnjUKhQvsD8oFXSvwk76BeBM-gzGzoHsz",
+                key: "4ekLWz6lhMfHdJ3AIm8OVYJz",
+                serverURL: "https://fnjukhqv.lc-cn-n1-shared.com"
+            )
+            
+        } catch {
+            print(error)
+        }
         return true
     }
 

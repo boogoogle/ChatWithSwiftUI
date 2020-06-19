@@ -1,0 +1,6 @@
+framework module Pods_SwiftUIBilibili {
+  umbrella header "Pods-SwiftUIBilibili-umbrella.h"
+
+  export *
+  module * { export * }
+}
