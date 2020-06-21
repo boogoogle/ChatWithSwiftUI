@@ -7,15 +7,20 @@
 //
 
 import SwiftUI
+import LeanCloud
 
 struct TextMessageCell: View {
-    var isSelf: Bool = false
-    var msgText: String = ""
-//    var msg: MessageModel
+    var message: IMTextMessage
+    var isSelf: Bool
+    
+    init(message: IMTextMessage) {
+        self.message = message
+        self.isSelf = LCApplication.default.currentUser?.email?.stringValue == message.fromClientID!.stringValue
+    }
     
     var body: some View {
         HStack {
-            isSelf ? Text("Avatar")
+            self.isSelf ? Text("他说")
                         .font(.title)
                         .foregroundColor(Color.white)
                         .frame(width: 60.0, height: 60.0, alignment: .center)
@@ -23,11 +28,11 @@ struct TextMessageCell: View {
                         .cornerRadius(30.0) : nil
             
             VStack(alignment: isSelf ? .leading : .trailing) {
-                Text("Boo")
+                Text(message.fromClientID ?? "-")
                     .font(.title)
-                Text(msgText)
+                Text(message.text ?? "-")
             }
-            !isSelf ? Text("Avatar")
+            !self.isSelf ? Text("我说")
                         .font(.title)
                         .foregroundColor(Color.white)
                         .frame(width: 60.0, height: 60.0, alignment: .center)
@@ -37,8 +42,8 @@ struct TextMessageCell: View {
     }
 }
 
-struct TextMessageCell_Previews: PreviewProvider {
-    static var previews: some View {
-        TextMessageCell()
-    }
-}
+//struct TextMessageCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TextMessageCell()
+//    }
+//}

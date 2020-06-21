@@ -30,9 +30,11 @@ struct ConversationDetail: View {
             Color.white.edgesIgnoringSafeArea(.all) // 没有这个,对于ZStack的onTapGesture不会生效
             VStack {
                 Text(conversation.name ?? "_")
-//                TextMessageCell()
-                VStack{
-                    Text("消息数目: \(self.conversationDetainData.messages.count)")
+                Text("消息数目: \(self.conversationDetainData.messages.count)")
+                List(self.conversationDetainData.messages,id: \.ID){ (msg: IMMessage) in
+                    VStack{
+                        TextMessageCell(message: msg as! IMTextMessage)
+                    }
                 }
                 
                 Spacer()

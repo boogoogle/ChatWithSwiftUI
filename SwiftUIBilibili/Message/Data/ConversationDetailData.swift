@@ -33,5 +33,8 @@ final class ConversationDetailData: ObservableObject {
             print(error)
         }
     }
+//    func addObserverForClient(){
+//
+//    }
 }
 
