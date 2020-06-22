@@ -19,25 +19,35 @@ struct TextMessageCell: View {
     }
     
     var body: some View {
-        HStack {
-            self.isSelf ? Text("他说")
-                        .font(.title)
-                        .foregroundColor(Color.white)
-                        .frame(width: 60.0, height: 60.0, alignment: .center)
-                        .background(Color.blue)
-                        .cornerRadius(30.0) : nil
+        HStack(alignment: isSelf ? .top : .bottom) {
             
-            VStack(alignment: isSelf ? .leading : .trailing) {
+            if !isSelf {
+                Text("Ta")
+                    .font(.title)
+                    .foregroundColor(Color.white)
+                    .frame(width: 60.0, height: 60.0, alignment: .center)
+                    .background(Color.blue)
+                    .cornerRadius(30.0)
+                
+            }
+            
+            if isSelf {
+                 Spacer()
+            }
+            VStack(alignment: isSelf ? .trailing : .leading ) {
                 Text(message.fromClientID ?? "-")
                     .font(.title)
                 Text(message.text ?? "-")
             }
-            !self.isSelf ? Text("我说")
-                        .font(.title)
-                        .foregroundColor(Color.white)
-                        .frame(width: 60.0, height: 60.0, alignment: .center)
-                        .background(Color.blue)
-                        .cornerRadius(30.0) : nil
+            if isSelf {
+                Text("Wo")
+                    .font(.title)
+                    .foregroundColor(Color.white)
+                    .frame(width: 60.0, height: 60.0, alignment: .center)
+                    .background(Color.blue)
+                    .cornerRadius(30.0)
+                
+            }
         }
     }
 }

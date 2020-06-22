@@ -36,16 +36,22 @@ extension LCClient: IMClientDelegate {
     }
     
     func client(_ client: IMClient, conversation: IMConversation, event: IMConversationEvent) {
-        switch event {
-            case .message(event: let messageEvent):
-                switch messageEvent {
-                    case .received(message: let message):
-                        print(message)
-                    default:
-                        break
-            }
-            default:
-                break
+//        switch event {
+//            case .message(event: let messageEvent):
+//                switch messageEvent {
+//                    case .received(message: let message):
+//                        print("=====================",message)
+//                    default:
+//                        break
+//            }
+//            case .unreadMessageCountUpdated:
+//                print("2222")
+//            default:
+//                break
+//        }
+        
+        for item in LCClient.eventObserverMap.values {
+            item(client, conversation, event)
         }
     }
 }

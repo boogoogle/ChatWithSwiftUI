@@ -17,7 +17,7 @@ struct DanceGround: View {
         ZStack {
             TitleView()
             
-            CardBottomView()
+            DanceGroundBottomCardView()
             
             CardView()
                 .offset(x: 0, y: -40)
@@ -108,114 +108,4 @@ struct TitleView: View {
     }
 }
 
-struct CardBottomView: View {
-    @State var friendEmail: String = "B@b.b"
-    @State var showDetail: Bool = false
-//    @EnvironmentObject var conversationDetailData: ConversationDetailData
-    @State var convsersationDetail = ConversationDetail()
-    
-    func createNormalConversation(){
-        var memberSet = Set<String>()
-        memberSet.insert(LCClient.current.ID)
-        memberSet.insert(friendEmail)
-        guard memberSet.count > 1 else {
-            return
-        }
-        
-        let name: String = {
-            let sortedNames: [String] = memberSet.sorted(by: { $0 < $1 })
-            let name: String
-            if sortedNames.count > 3 {
-                name = [sortedNames[0], sortedNames[1], sortedNames[2], "..."].joined(separator: " & ")
-            } else {
-                name = sortedNames.joined(separator: " & ")
-            }
-            return name
-        }()
-        
-        do {
-            try LCClient.current.createConversation(clientIDs: memberSet, name: name, completion: {(result) in
-                switch result {
-                    case .success(value: let conversation):
-//                        let messageListVc = MessagePort
-                        print(conversation,"conversation---")
-                        // 通过直接传参,全局保存, 哪种方式好呢?
-                        self.convsersationDetail.conversation = conversation
-                        LCClient.currentConversation = conversation
-                        self.showDetail = true
-                    case .failure(error: let error):
-                        print(error)
-                        break
-                }
-            })
-        }catch {
-            print("\(error)")
-        }
-        
-        
-        
-    }
-    
-    func initIMClient(){
-        do {
-            let clientId: String = LCApplication.default.currentUser?.email!.rawValue as? String ?? ""
-            if clientId != ""{
-                print("initIMClient, 当前登录用户的Email是: ", clientId)
-            }
-            let client = try IMClient(
-                ID: clientId
-            )
-            self.open(client: client)
-        } catch {
-            print(error)
-        }
-        
-    }
-    func open(client: IMClient){
-        print("open")
-        client.open { (result) in
-            print("IMClient open 结果",result)
-            switch result {
-                case .success:
-                    LCClient.current = client
-                    break
-                case .failure(error: let error):
-                    print(error)
-            }
-        }
-    }
-    
-    var body: some View {
-        VStack(spacing: 20.0) {
-            Rectangle()
-                .frame(width: 60, height: 6)
-                .cornerRadius(3.0)
-                .opacity(0.1)
-            
-            Text("来擦火花滋人")
-            
-            HStack {
-                TextField("输入对方id", text: $friendEmail)
-                Button(action:{
-                    self.createNormalConversation()
-                }){
-                    Text("确定")
-                }.sheet(isPresented: $showDetail){
-                    self.convsersationDetail.environmentObject(ConversationDetailData())
-                }
-            }
-            
-            Spacer()
-        }
-        .frame(minWidth: 0, maxWidth: .infinity) // 使之宽度全屏
-        .padding()
-        .padding(.horizontal)
-        .background(Color.white)// 这里不设置background,下面的shadow看不出来
-        .cornerRadius(30)
-        .shadow(radius: 20)
-        .offset(y: 600)
-            .onAppear(){
-                self.initIMClient()
-        }
-    }
-}
+

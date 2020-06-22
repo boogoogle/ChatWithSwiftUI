@@ -28,6 +28,7 @@
 		F85FDF05249B454C0066E816 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDF02249B454C0066E816 /* Data.swift */; };
 		F85FDF06249B454C0066E816 /* NormalConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDF03249B454C0066E816 /* NormalConversationModel.swift */; };
 		F85FDF09249B45720066E816 /* conversationListData.json in Resources */ = {isa = PBXBuildFile; fileRef = F85FDF08249B45720066E816 /* conversationListData.json */; };
+		F8813F35249F393600E4201D /* DanceGroundBottomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F34249F393600E4201D /* DanceGroundBottomCardView.swift */; };
 		F8A19C882498BD8E004056D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C872498BD8E004056D1 /* AppDelegate.swift */; };
 		F8A19C8A2498BD8E004056D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C892498BD8E004056D1 /* SceneDelegate.swift */; };
 		F8A19C8C2498BD8E004056D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C8B2498BD8E004056D1 /* ContentView.swift */; };
@@ -65,6 +66,7 @@
 		F85FDF02249B454C0066E816 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		F85FDF03249B454C0066E816 /* NormalConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalConversationModel.swift; sourceTree = "<group>"; };
 		F85FDF08249B45720066E816 /* conversationListData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversationListData.json; sourceTree = "<group>"; };
+		F8813F34249F393600E4201D /* DanceGroundBottomCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanceGroundBottomCardView.swift; sourceTree = "<group>"; };
 		F8A19C842498BD8E004056D1 /* SwiftUIBilibili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIBilibili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8A19C872498BD8E004056D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8A19C892498BD8E004056D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				F84A4125249A02900044D50D /* LoadingView.swift */,
 				F84A412B249A07020044D50D /* SuccessView.swift */,
 				F84A4129249A046B0044D50D /* CartoonView.swift */,
+				F8813F34249F393600E4201D /* DanceGroundBottomCardView.swift */,
 			);
 			path = SwiftUIBilibili;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				F85FDF05249B454C0066E816 /* Data.swift in Sources */,
 				F8A19C8C2498BD8E004056D1 /* ContentView.swift in Sources */,
 				F85FDEFF249B44F80066E816 /* NormalConversationListCell.swift in Sources */,
+				F8813F35249F393600E4201D /* DanceGroundBottomCardView.swift in Sources */,
 				F85FDEFA249B44820066E816 /* MessageInputer.swift in Sources */,
 				F85FDEE7249A0FC60066E816 /* BlurView.swift in Sources */,
 				F8A19CA12498BDF6004056D1 /* Home.swift in Sources */,

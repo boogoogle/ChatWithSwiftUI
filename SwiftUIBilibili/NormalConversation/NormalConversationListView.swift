@@ -13,7 +13,7 @@ struct NormalConversationListView: View {
         NavigationView {
             List(conversationListData) {conversation in
                 NavigationLink(destination: ConversationDetail()){
-                    NormalConversationListCell(conversation: conversation)
+                    NormalConversationListCell(conversation: LCClient.currentConversation)
                 }
             }
             .navigationBarTitle(Text("Dance Ground"))
