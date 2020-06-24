@@ -15,6 +15,7 @@ struct ConversationDetail: View {
     @State var isInputerFocus = false
     @State var textMsg =  "Say something"
     @State var conversation:  IMConversation! = LCClient.currentConversation
+    @State var messages = [IMMessage]()
     
     let uuid = UUID().uuidString
     
@@ -36,14 +37,12 @@ struct ConversationDetail: View {
                 default:
                     break
             }
-            
-            
         })
     }
     
     func handleMessageReceived(message: IMMessage){
         print("------ message received ----------111", message)
-        self.conversationDetainData.messages.append(message)
+        self.messages.append(message)
     }
     func handleMessageUpdated(updatedMessage: IMMessage){
         print("------ message updated ----------111", updatedMessage)
@@ -51,11 +50,12 @@ struct ConversationDetail: View {
     
     func queryMessageHistory(){
         do {
-            try conversation.queryMessage(limit: 10) { (result) in
+            try conversation.queryMessage(limit: 15) { (result) in
                 switch result {
                     case .success(value: let messages):
-                        self.conversationDetainData.messages = messages
-                        print(messages)
+//                        self.conversationDetainData.messages = messages
+                        self.messages = messages
+//                        print(messages)
                     case .failure(error: let error):
                         print(error)
                 }
@@ -72,6 +72,9 @@ struct ConversationDetail: View {
          */
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
+    func handleScroll(_ edge: Edge){
+        print(edge, "edge")
+    }
     
     var body: some View {
         ZStack{
@@ -80,7 +83,7 @@ struct ConversationDetail: View {
                 VStack {
                     Text(conversation.name ?? "_")
                     Text("未读消息: \(self.conversation.unreadMessageCount)")
-                    List(self.conversationDetainData.messages,id: \.ID){ (msg: IMMessage) in
+                    List(messages, id: \.ID){ (msg: IMMessage) in
                         VStack{
                             TextMessageCell(message: msg as! IMTextMessage)
                         }

@@ -12,8 +12,6 @@ import LeanCloud
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -32,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print(error)
         }
+        
+//        LCRest.getConversationHistoryById(id: "5eef00a10d3a42c5fda6b448", callback: { l in
+//            print(l,"llllll")
+//        })
         return true
     }
 

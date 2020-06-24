@@ -39,8 +39,11 @@ struct TextMessageCell: View {
                     .font(.title)
                 Text(message.text ?? "-")
             }
+            if !isSelf {
+                Spacer()
+            }
             if isSelf {
-                Text("Wo")
+                Text("Me")
                     .font(.title)
                     .foregroundColor(Color.white)
                     .frame(width: 60.0, height: 60.0, alignment: .center)

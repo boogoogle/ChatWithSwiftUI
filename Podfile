@@ -4,6 +4,8 @@
 target 'SwiftUIBilibili' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  
+  pod 'SwiftyJSON', '~> 5.0.0'
 
   # Pods for SwiftUIBilibili
   pod 'lottie-ios'

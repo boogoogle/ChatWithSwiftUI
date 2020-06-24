@@ -21,7 +21,8 @@ struct Home: View {
                 .cornerRadius(30)
                 .shadow(radius: 30)
                 .animation(.spring())
-//                .offset(y: showProfile ? 0 : UIScreen.main.bounds.height)
+                .environmentObject(DanceGroundData())
+//                .offset(y: showProfile ? 0 : MAINHEIGHT)
             MenuButton(show: $show)
                 .animation(.spring())
                 .offset(x: -60, y:showProfile ? 60 : 5)
@@ -76,9 +77,9 @@ struct Menu: Identifiable {
 }
 
 let menuData = [
-    Menu(title: "My Account", icon: "person.crop.circle"),
-    Menu(title: "Billing", icon: "creditcard"),
-    Menu(title: "Team", icon: "person.2"),
+//    Menu(title: "My Account", icon: "person.crop.circle"),
+//    Menu(title: "Billing", icon: "creditcard"),
+    Menu(title: "Cancel", icon: "arrow.turn.up.left"),
 ]
 
 struct MenuView: View {
@@ -95,6 +96,7 @@ struct MenuView: View {
                     LCUser.logOut()
                     UserDefaults.standard.set(false, forKey: "isLogged")
                     self.user.isLogged = false
+                    self.show = false
             }
             Spacer()
         }
@@ -160,21 +162,17 @@ struct MenuRight: View {
         ZStack(alignment:.topTrailing) {
             HStack(alignment: .center) {
                 if user.isLogged {
+                    Text(lc_user_email)
                     Button(action: {self.show.toggle()}){
                         CircleButton(icon: "person.crop.circle")
                     }
-                    Text(lc_user_email)
                 } else {
+                    Text("未登录")
+                        .foregroundColor(Color.red)
                     Button(action: {self.user.showLogin = true}){
                         CircleButton(icon: "person.crop.circle.badge.exclam")
                     }
-                    Text("未登录")
-                        .foregroundColor(Color.red)
                 }
-                
-                //                Button(action: {self.show.toggle()}){
-                //                    CircleButton(icon: "bell")
-                //                }
             }
             Spacer()
                 .frame(minWidth:0,maxHeight: .infinity)

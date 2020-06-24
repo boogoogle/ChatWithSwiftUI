@@ -3,21 +3,23 @@ PODS:
   - GRDB.swift (4.14.0):
     - GRDB.swift/standard (= 4.14.0)
   - GRDB.swift/standard (4.14.0)
-  - LeanCloud/Foundation (17.5.5):
+  - LeanCloud/Foundation (17.5.6):
     - Alamofire (~> 5.0)
-  - LeanCloud/RTM (17.5.5):
+  - LeanCloud/RTM (17.5.6):
     - GRDB.swift (~> 4.9)
-    - LeanCloud/Foundation (= 17.5.5)
+    - LeanCloud/Foundation (= 17.5.6)
     - Starscream (~> 3.1)
     - SwiftProtobuf (~> 1.8)
   - lottie-ios (3.1.8)
   - Starscream (3.1.1)
   - SwiftProtobuf (1.9.0)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - LeanCloud/Foundation
   - LeanCloud/RTM
   - lottie-ios
+  - SwiftyJSON (~> 5.0.0)
 
 SPEC REPOS:
   trunk:
@@ -27,15 +29,17 @@ SPEC REPOS:
     - lottie-ios
     - Starscream
     - SwiftProtobuf
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   GRDB.swift: 8cc3ab7c8b8b4ac1761deb8dca4b51c1c9d429f8
-  LeanCloud: efbefbbc19c58ff6133a54a0d4980b844482f816
+  LeanCloud: a79712d665ca109870d66857a67538e5f102440c
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftProtobuf: ecbec1be9036d15655f6b3443a1c4ea693c97932
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 724f65f2ca4af25cee0e7739dab3014d40a3820e
+PODFILE CHECKSUM: a1c3f5d20c1b766cb6c7dfdda24c7e37d61bed4b
 
 COCOAPODS: 1.9.1

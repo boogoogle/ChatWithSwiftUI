@@ -12,10 +12,13 @@ import LeanCloud
 struct DanceGroundBottomCardView: View {
     @State var friendEmail: String = "B@b.b"
     @State var showDetail: Bool = false
+    @State var showMoreModel: Bool = false
     //    @EnvironmentObject var conversationDetailData: ConversationDetailData
     @State var convsersationDetail = ConversationDetail()
     @State var unreadMessageCount = 0
+    
     let uuid = UUID().uuidString
+    let screenHeight = UIScreen.main.bounds.height
     
     func createNormalConversation(){
         print("createNormalConversation -- start")
@@ -123,6 +126,9 @@ struct DanceGroundBottomCardView: View {
                 .frame(width: 60, height: 6)
                 .cornerRadius(3.0)
                 .opacity(0.1)
+                .onTapGesture {
+                    self.showMoreModel = !self.showMoreModel
+            }
             
             VStack(alignment: .leading){
                 Text("未读消息: \(self.unreadMessageCount)")
@@ -154,7 +160,8 @@ struct DanceGroundBottomCardView: View {
             .background(Color.white)// 这里不设置background,下面的shadow看不出来
             .cornerRadius(30)
             .shadow(radius: 20)
-            .offset(y: 600)
+            .offset(y: showMoreModel ? screenHeight * 1/3 : screenHeight * 3/4)
+            .layoutPriority(22.0)
             .onAppear(){
                 self.initIMClient()
         }
