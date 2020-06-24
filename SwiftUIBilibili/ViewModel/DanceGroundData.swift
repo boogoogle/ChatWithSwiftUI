@@ -12,5 +12,5 @@ import LeanCloud
 
 final class DanceGroundData: ObservableObject {
 //    @Published var convHistoryGroup = [String: [IMMessage]]()
-    @Published var convHistoryGroup = [[IMMessage]]()
+    @Published var convHistoryGroup = [[MessageFromConvHistoryModel]]()
 }

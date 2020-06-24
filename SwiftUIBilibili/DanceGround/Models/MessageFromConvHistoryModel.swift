@@ -12,10 +12,11 @@ import SwiftUI
         获取到的message 数据类型和 IMMessage不一样
         所以在此处重新定义一份
  */
-struct MessageFromConvHistoryModel {
+struct MessageFromConvHistoryModel: Hashable {
     var msgId: String
     var convId: String
     var timestamp: String
     var lcText: String
+    var from: String
 }
 

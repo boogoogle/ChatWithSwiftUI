@@ -28,12 +28,12 @@ struct LCRest {
                 let msgId = withJson["msg-id"].string ?? ""
                 let convId = withJson["conv-id"].string ?? ""
                 let timestamp = withJson["timestamp"].string ?? ""
-                
+                let from = withJson["from"].string ?? ""
                 
                 let dataJ = JSON(parseJSON: withJson["data"].rawValue as! String)
                 let lcText = dataJ["_lctext"].string ?? ""
                 
-                return MessageFromConvHistoryModel(msgId: msgId, convId: convId, timestamp: timestamp, lcText: lcText)
+                return MessageFromConvHistoryModel(msgId: msgId, convId: convId, timestamp: timestamp, lcText: lcText,from:from)
             }
             
             for (_,subJson):(String, JSON) in json {

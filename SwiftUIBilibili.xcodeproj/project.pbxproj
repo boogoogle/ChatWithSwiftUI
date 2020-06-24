@@ -35,6 +35,7 @@
 		F8813F5E24A1E75700E4201D /* messageList.json in Resources */ = {isa = PBXBuildFile; fileRef = F8813F5D24A1E75700E4201D /* messageList.json */; };
 		F8813F6124A1FE4500E4201D /* DanceGroundData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F6024A1FE4500E4201D /* DanceGroundData.swift */; };
 		F8813F6424A2076000E4201D /* LeanCloudExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F6324A2076000E4201D /* LeanCloudExtension.swift */; };
+		F8813F6824A32A5E00E4201D /* DanceGroundQuickConvCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F6724A32A5E00E4201D /* DanceGroundQuickConvCard.swift */; };
 		F8A19C882498BD8E004056D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C872498BD8E004056D1 /* AppDelegate.swift */; };
 		F8A19C8A2498BD8E004056D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C892498BD8E004056D1 /* SceneDelegate.swift */; };
 		F8A19C8C2498BD8E004056D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C8B2498BD8E004056D1 /* ContentView.swift */; };
@@ -79,6 +80,7 @@
 		F8813F5D24A1E75700E4201D /* messageList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = messageList.json; sourceTree = "<group>"; };
 		F8813F6024A1FE4500E4201D /* DanceGroundData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanceGroundData.swift; sourceTree = "<group>"; };
 		F8813F6324A2076000E4201D /* LeanCloudExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeanCloudExtension.swift; sourceTree = "<group>"; };
+		F8813F6724A32A5E00E4201D /* DanceGroundQuickConvCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanceGroundQuickConvCard.swift; sourceTree = "<group>"; };
 		F8A19C842498BD8E004056D1 /* SwiftUIBilibili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIBilibili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8A19C872498BD8E004056D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8A19C892498BD8E004056D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -176,7 +178,6 @@
 		F85FDF00249B454C0066E816 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F85FDF01249B454C0066E816 /* MessageFromConvHistoryModel.swift */,
 				F85FDF02249B454C0066E816 /* Data.swift */,
 				F85FDF03249B454C0066E816 /* NormalConversationModel.swift */,
 			);
@@ -223,6 +224,31 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		F8813F6524A329FD00E4201D /* DanceGround */ = {
+			isa = PBXGroup;
+			children = (
+				F8813F6924A32AF600E4201D /* Models */,
+				F8813F6624A32A1600E4201D /* Components */,
+			);
+			path = DanceGround;
+			sourceTree = "<group>";
+		};
+		F8813F6624A32A1600E4201D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F8813F6724A32A5E00E4201D /* DanceGroundQuickConvCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		F8813F6924A32AF600E4201D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F85FDF01249B454C0066E816 /* MessageFromConvHistoryModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		F8A19C7B2498BD8E004056D1 = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +270,7 @@
 		F8A19C862498BD8E004056D1 /* SwiftUIBilibili */ = {
 			isa = PBXGroup;
 			children = (
+				F8813F6524A329FD00E4201D /* DanceGround */,
 				F8813F6224A2074900E4201D /* Extensions */,
 				F8813F5F24A1FE2300E4201D /* ViewModel */,
 				F8813F5A24A1D69400E4201D /* Api */,
@@ -424,6 +451,7 @@
 				F8813F5724A1CEB300E4201D /* NetworkManager.swift in Sources */,
 				F85FDEF7249B44820066E816 /* TextMessageCell.swift in Sources */,
 				F85FDEF5249B44820066E816 /* ConversationDetailController.swift in Sources */,
+				F8813F6824A32A5E00E4201D /* DanceGroundQuickConvCard.swift in Sources */,
 				F84A412C249A07020044D50D /* SuccessView.swift in Sources */,
 				F84A4124249A01040044D50D /* LottieView.swift in Sources */,
 				F85FDF04249B454C0066E816 /* MessageFromConvHistoryModel.swift in Sources */,

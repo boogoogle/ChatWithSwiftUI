@@ -23,7 +23,7 @@ struct DanceGround: View {
             switch result {
                 case .success(objects: let convObjList):
                     self.convObjList = convObjList
-//                    self.updateConvList()
+                    self.updateConvList()
                 case .failure(error: let error):
                     print(error)
             }
@@ -34,11 +34,7 @@ struct DanceGround: View {
             let convId = conv.objectId!.rawValue as! String
             // 使用Conversation的id获取最新的几条消息
             LCRest.getConversationHistoryById(id: convId,callback: {list in
-                print(list, "listtt")
-//                self.viewModel.convHistoryGroup[convId] = list as? [IMMessage]
-                
-                self.viewModel.convHistoryGroup.append(list as! [IMMessage])
-
+                self.viewModel.convHistoryGroup.append(list)
             })
         }
     }
@@ -47,8 +43,27 @@ struct DanceGround: View {
         ZStack {
 //            TitleView()
             
-             
-//            CardView(messageList: $viewModel.convHistoryGroup[0])
+            if viewModel.convHistoryGroup.count > 0 {
+                // 用循环不好做啊,怎么拿索引???
+//                VStack {
+//                    ForEach(viewModel.convHistoryGroup, id: \.self) { (msgList) in
+//                        DanceGroundQuickConvCard(messageList: msgList)
+//
+//                    }
+//                }
+                
+                DanceGroundQuickConvCard(messageList: viewModel.convHistoryGroup[0])
+            }
+            if viewModel.convHistoryGroup.count > 1{
+                DanceGroundQuickConvCard(messageList: viewModel.convHistoryGroup[1])
+                    .offset(x: 20,y: 40)
+            }
+            
+            if viewModel.convHistoryGroup.count > 2{
+                DanceGroundQuickConvCard(messageList: viewModel.convHistoryGroup[2])
+                    .offset(x: 40,y: 80)
+            }
+            
 //            CardView(messageList: $viewModel.convHistoryGroup[1])
             //                    .blendMode(.darken)
             
@@ -94,11 +109,13 @@ struct DanceGround_Previews: PreviewProvider {
 }
 
 struct CardView: View {
-    @Binding var messageList: [IMMessage]
+    @Binding var messageList: [MessageFromConvHistoryModel]
 
     var body: some View {
         VStack(){
-            Text("Card Back")
+            ForEach(messageList, id: \.msgId){ m in
+                Text(m.lcText)
+            }
         }
         .frame(width: 300.0, height: 220.0)
         .background(Color.blue)

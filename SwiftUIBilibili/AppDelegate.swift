@@ -25,8 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 id: "fnjUKhQvsD8oFXSvwk76BeBM-gzGzoHsz",
                 key: "4ekLWz6lhMfHdJ3AIm8OVYJz",
                 serverURL: "https://fnjukhqv.lc-cn-n1-shared.com"
-            )
-            
+            )  
         } catch {
             print(error)
         }
