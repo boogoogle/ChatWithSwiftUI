@@ -36,6 +36,8 @@
 		F8813F6124A1FE4500E4201D /* DanceGroundData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F6024A1FE4500E4201D /* DanceGroundData.swift */; };
 		F8813F6424A2076000E4201D /* LeanCloudExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F6324A2076000E4201D /* LeanCloudExtension.swift */; };
 		F8813F6824A32A5E00E4201D /* DanceGroundQuickConvCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F6724A32A5E00E4201D /* DanceGroundQuickConvCard.swift */; };
+		F8813F6B24A35E7700E4201D /* SwiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F6A24A35E7700E4201D /* SwiftExtension.swift */; };
+		F8813F6D24A3625500E4201D /* ImageMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F6C24A3625500E4201D /* ImageMessageCell.swift */; };
 		F8A19C882498BD8E004056D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C872498BD8E004056D1 /* AppDelegate.swift */; };
 		F8A19C8A2498BD8E004056D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C892498BD8E004056D1 /* SceneDelegate.swift */; };
 		F8A19C8C2498BD8E004056D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C8B2498BD8E004056D1 /* ContentView.swift */; };
@@ -46,6 +48,8 @@
 		F8A19C9E2498BDE6004056D1 /* DanceGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C9D2498BDE6004056D1 /* DanceGround.swift */; };
 		F8A19CA12498BDF6004056D1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C9F2498BDF6004056D1 /* Home.swift */; };
 		F8A19CA22498BDF6004056D1 /* HomeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19CA02498BDF6004056D1 /* HomeList.swift */; };
+		F8D2299F24A83FCB001F7EAB /* MessageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2299E24A83FCB001F7EAB /* MessageWrapper.swift */; };
+		F8D229A124A8921A001F7EAB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229A024A8921A001F7EAB /* ImagePicker.swift */; };
 		F8F28680249A093A00B6AC05 /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = F8F2867F249A093A00B6AC05 /* success.json */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +85,8 @@
 		F8813F6024A1FE4500E4201D /* DanceGroundData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanceGroundData.swift; sourceTree = "<group>"; };
 		F8813F6324A2076000E4201D /* LeanCloudExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeanCloudExtension.swift; sourceTree = "<group>"; };
 		F8813F6724A32A5E00E4201D /* DanceGroundQuickConvCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanceGroundQuickConvCard.swift; sourceTree = "<group>"; };
+		F8813F6A24A35E7700E4201D /* SwiftExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftExtension.swift; sourceTree = "<group>"; };
+		F8813F6C24A3625500E4201D /* ImageMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMessageCell.swift; sourceTree = "<group>"; };
 		F8A19C842498BD8E004056D1 /* SwiftUIBilibili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIBilibili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8A19C872498BD8E004056D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8A19C892498BD8E004056D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +99,8 @@
 		F8A19C9D2498BDE6004056D1 /* DanceGround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanceGround.swift; sourceTree = "<group>"; };
 		F8A19C9F2498BDF6004056D1 /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		F8A19CA02498BDF6004056D1 /* HomeList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeList.swift; sourceTree = "<group>"; };
+		F8D2299E24A83FCB001F7EAB /* MessageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageWrapper.swift; sourceTree = "<group>"; };
+		F8D229A024A8921A001F7EAB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F8F2867F249A093A00B6AC05 /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +162,8 @@
 				F85FDEF1249B44820066E816 /* ConversationDetail.swift */,
 				F85FDEF2249B44820066E816 /* Data */,
 				F85FDEF4249B44820066E816 /* MessageInputer.swift */,
+				F8813F6C24A3625500E4201D /* ImageMessageCell.swift */,
+				F8D2299E24A83FCB001F7EAB /* MessageWrapper.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -220,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				F8813F6324A2076000E4201D /* LeanCloudExtension.swift */,
+				F8813F6A24A35E7700E4201D /* SwiftExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -237,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				F8813F6724A32A5E00E4201D /* DanceGroundQuickConvCard.swift */,
+				F8D229A024A8921A001F7EAB /* ImagePicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -445,7 +457,10 @@
 				F85FDEFA249B44820066E816 /* MessageInputer.swift in Sources */,
 				F85FDEE7249A0FC60066E816 /* BlurView.swift in Sources */,
 				F8A19CA12498BDF6004056D1 /* Home.swift in Sources */,
+				F8D2299F24A83FCB001F7EAB /* MessageWrapper.swift in Sources */,
 				F8A19C9E2498BDE6004056D1 /* DanceGround.swift in Sources */,
+				F8D229A124A8921A001F7EAB /* ImagePicker.swift in Sources */,
+				F8813F6D24A3625500E4201D /* ImageMessageCell.swift in Sources */,
 				F85FDEF8249B44820066E816 /* ConversationDetail.swift in Sources */,
 				F8813F6124A1FE4500E4201D /* DanceGroundData.swift in Sources */,
 				F8813F5724A1CEB300E4201D /* NetworkManager.swift in Sources */,
@@ -455,6 +470,7 @@
 				F84A412C249A07020044D50D /* SuccessView.swift in Sources */,
 				F84A4124249A01040044D50D /* LottieView.swift in Sources */,
 				F85FDF04249B454C0066E816 /* MessageFromConvHistoryModel.swift in Sources */,
+				F8813F6B24A35E7700E4201D /* SwiftExtension.swift in Sources */,
 				F84A4126249A02900044D50D /* LoadingView.swift in Sources */,
 				F8813F6424A2076000E4201D /* LeanCloudExtension.swift in Sources */,
 				F84A412A249A046B0044D50D /* CartoonView.swift in Sources */,

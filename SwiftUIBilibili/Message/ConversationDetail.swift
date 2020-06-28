@@ -85,7 +85,8 @@ struct ConversationDetail: View {
                     Text("未读消息: \(self.conversation.unreadMessageCount)")
                     List(messages, id: \.ID){ (msg: IMMessage) in
                         VStack{
-                            TextMessageCell(message: msg as! IMTextMessage)
+//                            TextMessageCell(message: msg as! IMTextMessage)
+                            MessageWrapper(message: msg)
                         }
                     }
                     Spacer()

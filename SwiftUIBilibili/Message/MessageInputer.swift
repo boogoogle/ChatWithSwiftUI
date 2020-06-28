@@ -18,6 +18,8 @@ struct MessageInputer: View {
     @Binding var textMessage: String
     @Binding var isFocus: Bool
     @EnvironmentObject private var cdd: ConversationDetailData
+    @State var showImagePicker = false
+    @State var image: UIImage? = nil
     
     
     func hideKeyboard(){
@@ -29,39 +31,91 @@ struct MessageInputer: View {
     }
     
     func ensure(){
-        print(self.$textMessage)
-        let imTextMessage = IMTextMessage(text: self.textMessage)
-        self.cdd.sendMsg(message: imTextMessage)
-
+        if(self.image != nil) {
+//            let imageUrl = uploadImage()
+            if  let jpegData = image?.jpegData(compressionQuality: 1.0){
+                let file = LCFile(payload: .data(data: jpegData))
+                
+                _ = file.save{ result in
+                    switch result {
+                        case .success:
+                            if let imageLCUrl = file.url?.value {
+                                if let url = URL(string: imageLCUrl) {
+                                    let imImageMessage = IMImageMessage(url: url)
+                                    self.cdd.sendMsg(message: imImageMessage)
+                                }
+                        }
+                        case .failure(error: let error):
+                            print(error, "pic save error")
+                    }
+                }
+            }
+        } else {
+            print(self.$textMessage)
+            let imTextMessage = IMTextMessage(text: self.textMessage)
+            self.cdd.sendMsg(message: imTextMessage)
+        }
+        
+        
+    }
+    func uploadImage(){
+//        do {
+//            if let imageFilePath = Bundle.main.url(forResource: "image", withExtension: "jpg")?.path {
+//                let imageMessage = IMImageMessage(filePath: imageFilePath, format: "jpg")
+//                try LCClient.currentConversation.send(message: imageMessage, completion: { (result) in
+//                    switch result {
+//                        case .success:
+//                            break
+//                        case .failure(error: let error):
+//                            print(error)
+//                    }
+//                })
+//            }
+//        } catch {
+//            print(error)
+//        }
     }
     var body: some View {
-        HStack {
-            TextField("Say Hi", text: $textMessage)
-                .padding(.leading, 5.0)
+        VStack {
+            if image != nil {
+                Image(uiImage: image!).resizable().frame(width:100, height:100)
+            }
+            HStack {
+                TextField("Say Hi", text: $textMessage)
+                    .padding(.leading, 5.0)
+                    .frame(height: 40.0)
+                    .foregroundColor(Color.green)
+                    .onTapGesture {
+                        self.isFocus = true
+                }
+                Button(action: {
+                    self.isFocus = false
+                    self.hideKeyboard()
+                    self.ensure()
+                }) {
+                    Text("Send")
+                }
+                .padding(.horizontal, 8.0)
                 .frame(height: 40.0)
-                .foregroundColor(Color.green)
-                .onTapGesture {
-                    self.isFocus = true
+                .background(Color.blue)
+                .foregroundColor(Color.white)
+                
+                Button(action: {
+                    self.isFocus = false
+                    self.hideKeyboard()
+                    self.showImagePicker = true
+                }) {
+                    Image(systemName: "plus.circle")
+                }
+                
             }
-            Button(action: {
-                self.isFocus = false
-                self.hideKeyboard()
-                self.ensure()
-            }) {
-                Text("Send")
+            .padding(8.0)
+            .sheet(isPresented: $showImagePicker){
+                ImagePicker(sourceType: .photoLibrary) { image in
+                    self.image = image
+                    self.showImagePicker = false
+                }
             }
-            .padding(.horizontal, 8.0)
-            .frame(height: 40.0)
-            .background(Color.blue)
-            .foregroundColor(Color.white)
         }
-        .padding(8.0)
     }
 }
-//
-//struct MessageInputer_Previews: PreviewProvider {
-//    private var s: String
-//    static var previews: some View {
-////        MessageInputer(textMessage: s)
-//    }
-//}

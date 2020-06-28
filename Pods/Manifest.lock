@@ -14,12 +14,14 @@ PODS:
   - Starscream (3.1.1)
   - SwiftProtobuf (1.9.0)
   - SwiftyJSON (5.0.0)
+  - URLImage (0.9.15)
 
 DEPENDENCIES:
   - LeanCloud/Foundation
   - LeanCloud/RTM
   - lottie-ios
   - SwiftyJSON (~> 5.0.0)
+  - URLImage
 
 SPEC REPOS:
   trunk:
@@ -30,6 +32,7 @@ SPEC REPOS:
     - Starscream
     - SwiftProtobuf
     - SwiftyJSON
+    - URLImage
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
@@ -39,7 +42,8 @@ SPEC CHECKSUMS:
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftProtobuf: ecbec1be9036d15655f6b3443a1c4ea693c97932
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  URLImage: 1adef9b81f071fc2fc13a1a87ff882c0a694d48b
 
-PODFILE CHECKSUM: a1c3f5d20c1b766cb6c7dfdda24c7e37d61bed4b
+PODFILE CHECKSUM: bdca0a24e392a916358312bdf187c3767619b23a
 
 COCOAPODS: 1.9.1

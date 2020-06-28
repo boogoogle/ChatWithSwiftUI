@@ -42,27 +42,15 @@ struct DanceGround: View {
     var body: some View {
         ZStack {
 //            TitleView()
-            
             if viewModel.convHistoryGroup.count > 0 {
-                // 用循环不好做啊,怎么拿索引???
-//                VStack {
-//                    ForEach(viewModel.convHistoryGroup, id: \.self) { (msgList) in
-//                        DanceGroundQuickConvCard(messageList: msgList)
-//
-//                    }
-//                }
-                
-                DanceGroundQuickConvCard(messageList: viewModel.convHistoryGroup[0])
-            }
-            if viewModel.convHistoryGroup.count > 1{
-                DanceGroundQuickConvCard(messageList: viewModel.convHistoryGroup[1])
-                    .offset(x: 20,y: 40)
+                // numbered()是后期扩展的; 后面的id,必须用.element.xxx
+                ForEach(viewModel.convHistoryGroup.numbered(), id: \.element.self) { (num, msgList) in
+                    VStack{
+                        DanceGroundQuickConvCard(messageList: msgList)
+                    }.offset(x: CGFloat(20 * num) - 20, y: CGFloat(40 * num))
+                }
             }
             
-            if viewModel.convHistoryGroup.count > 2{
-                DanceGroundQuickConvCard(messageList: viewModel.convHistoryGroup[2])
-                    .offset(x: 40,y: 80)
-            }
             
 //            CardView(messageList: $viewModel.convHistoryGroup[1])
             //                    .blendMode(.darken)

@@ -6,6 +6,9 @@ target 'SwiftUIBilibili' do
   use_frameworks!
   
   pod 'SwiftyJSON', '~> 5.0.0'
+  
+  # https://github.com/dmytro-anokhin/url-image#installation
+  pod 'URLImage'
 
   # Pods for SwiftUIBilibili
   pod 'lottie-ios'
