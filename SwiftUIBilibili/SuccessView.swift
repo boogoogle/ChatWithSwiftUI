@@ -10,13 +10,16 @@ import SwiftUI
 
 struct SuccessView: View {
     @State var show = false
+    var text: String? = nil
     
     var body: some View {
         VStack {
-            Text("Logging you ...")
-                .font(.title).bold()
-                .opacity(show ? 1 : 0)
-                .animation(Animation.linear(duration: 1).delay(0.2))
+            if text != nil{
+                Text(text!)
+                    .font(.title).bold()
+                    .opacity(show ? 1 : 0)
+                    .animation(Animation.linear(duration: 1).delay(0.2))
+            }
             LottieView(filename: "success")
                 .frame(width: 300, height: 300)
                 .offset(y: -30)

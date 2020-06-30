@@ -18,11 +18,8 @@ struct Home: View {
         ZStack() {
             DanceGround()
                 .background(Color.white)
-                .cornerRadius(30)
-                .shadow(radius: 30)
                 .animation(.spring())
                 .environmentObject(DanceGroundData())
-//                .offset(y: showProfile ? 0 : MAINHEIGHT)
             MenuButton(show: $show)
                 .animation(.spring())
                 .offset(x: -60, y:showProfile ? 60 : 5)
@@ -30,6 +27,7 @@ struct Home: View {
                 .animation(.spring())
                 .offset(x: -30, y:showProfile ? 70 : 30)
             MenuView(show: $show) // 通过 $符号实现双向数据绑定
+            
             if user.showLogin  {
                 ZStack {
                     LoginView()
@@ -109,7 +107,7 @@ struct MenuView: View {
         .shadow(radius: 20)
             .rotation3DEffect(Angle(degrees: show ? 0 :30), axis: (x: 0, y: 10, z: 0)) // 这里axis的每个维度,值为1, 10, 100 没啥区别啊???
             .animation(.easeInOut) // 括号内是动画执行类型,
-            .offset(x: show ? 0 : -UIScreen.main.bounds.width)
+            .offset(x: show ? 0 : -MAINWIDTH)
             .onTapGesture {
                 self.show.toggle()
         }

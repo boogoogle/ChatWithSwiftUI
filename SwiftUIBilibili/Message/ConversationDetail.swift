@@ -41,11 +41,11 @@ struct ConversationDetail: View {
     }
     
     func handleMessageReceived(message: IMMessage){
-        print("------ message received ----------111", message)
+        dPrint("------ message received ----------111", message)
         self.messages.append(message)
     }
     func handleMessageUpdated(updatedMessage: IMMessage){
-        print("------ message updated ----------111", updatedMessage)
+        dPrint("------ message updated ----------111", updatedMessage)
     }
     
     func queryMessageHistory(){
@@ -85,7 +85,6 @@ struct ConversationDetail: View {
                     Text("未读消息: \(self.conversation.unreadMessageCount)")
                     List(messages, id: \.ID){ (msg: IMMessage) in
                         VStack{
-//                            TextMessageCell(message: msg as! IMTextMessage)
                             MessageWrapper(message: msg)
                         }
                     }

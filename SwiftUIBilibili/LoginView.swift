@@ -17,6 +17,7 @@ struct LoginView: View {
     @State var alertMessage = "Something went wrong."
     @State var isLoading = false
     @State var isSuccessful = false
+    @State var isSignUp = false
     @EnvironmentObject var user: UserStore
     
     func hideKeyboard(){
@@ -81,13 +82,13 @@ struct LoginView: View {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             self.isSuccessful = false
                             self.resetLogin()
+                            self.isSignUp = false
                         }
                         break
                     case .failure(error: let error):
                         if error.code == 202 {
                             self.alertMessage = error.description
                             self.showAlert = true
-                            // self.showAlert(title: "用户已存在", message: "正在登录...")
                     }
                     
                 }
@@ -109,74 +110,114 @@ struct LoginView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
                     .edgesIgnoringSafeArea(.bottom)
                 CoverView()
-                VStack{
-                    HStack {
-                        TextField("Email", text: $email)
-                            .keyboardType(.emailAddress)
-                            .font(.subheadline)
-    //                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(.leading)
-                            .frame(height: 44)
-                            .onTapGesture {
-                                self.isFocused = true
-                        }
-                    }
-                    Divider()
-                    HStack {
-                        SecureField("Password", text: $password)
-                            .keyboardType(.emailAddress)
-                            .font(.subheadline)
-                            .padding(.leading)
-                            .frame(height: 44)
-                            .onTapGesture {
-                                self.isFocused = true
-                        }
-                    }
-                }
-                .frame(height: 136)
-                .frame(maxWidth: .infinity)
-                .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                .clipShape(RoundedRectangle(cornerRadius: 30, style:.continuous))
-                .shadow(color: Color.black.opacity(0.15), radius: 20, x: 0, y: 20)
-                .padding(.horizontal)
-                .offset(y: 444)
-                
-                HStack {
-                    Button(action: {
-                        //                        self.showAlert = true
-                        self.signup()
-                    }) {
-                        Text("Sign up").foregroundColor(.white)
-                    }
-                    .padding(12)
-                    .padding(.horizontal, 30)
-                    .background(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .shadow(color: Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)).opacity(0.3), radius: 20, x: 0, y: 20)
-                    .alert(isPresented: $showAlert) {
-                        Alert(title: Text("Error"), message: Text(self.alertMessage), dismissButton: .default(Text("OK")))
-                    }
+                VStack {
                     Spacer()
-                    Button(action: {
-//                        self.showAlert = true
-                        self.login()
-                    }) {
-                        Text("Log in").foregroundColor(.black)
+                    HStack{
+                        if !isSignUp {
+                            VStack{ // 登录
+                                HStack {
+                                    TextField("Email", text: $email)
+                                        .keyboardType(.emailAddress)
+                                        .font(.subheadline)
+                                        //                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .padding(.leading)
+                                        .frame(height: 44)
+                                        .onTapGesture {
+                                            self.isFocused = true
+                                    }
+                                }
+                                Divider()
+                                HStack {
+                                    SecureField("Password", text: $password)
+                                        .keyboardType(.emailAddress)
+                                        .font(.subheadline)
+                                        .padding(.leading)
+                                        .frame(height: 44)
+                                        .onTapGesture {
+                                            self.isFocused = true
+                                    }
+                                }
+                            }
+                            .padding()
+                            .animation(.easeIn)
+                        } else {
+                            VStack{ // 注册
+                                HStack {
+                                    TextField("手机号(测试期间直接输入邮箱接口)", text: $email)
+                                        .keyboardType(.emailAddress)
+                                        .font(.subheadline)
+                                        //                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .padding(.leading)
+                                        .frame(height: 44)
+                                        .onTapGesture {
+                                            self.isFocused = true
+                                    }
+                                }
+                                Divider()
+                                HStack {
+                                    TextField("验证码(测试期间不需要)", text: $email)
+                                        .keyboardType(.emailAddress)
+                                        .font(.subheadline)
+                                        //                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .padding(.leading)
+                                        .frame(height: 44)
+                                        .onTapGesture {
+                                            self.isFocused = true
+                                    }
+                                }
+                                Divider()
+                                HStack {
+                                    SecureField("密码", text: $password)
+                                        .keyboardType(.emailAddress)
+                                        .font(.subheadline)
+                                        .padding(.leading)
+                                        .frame(height: 44)
+                                        .onTapGesture {
+                                            self.isFocused = true
+                                    }
+                                }
+                            }
+                            .padding()
+                            .animation(.easeOut)
+                        }
+                        
                     }
-                    .padding(12)
-                    .padding(.horizontal, 30)
-                    .background(Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)))
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .shadow(color: Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)).opacity(0.3), radius: 20, x: 0, y: 20)
-                    .alert(isPresented: $showAlert) {
-                        Alert(title: Text("Error"), message: Text(self.alertMessage), dismissButton: .default(Text("OK")))
+                    .frame(maxWidth: .infinity)
+                    .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                    .clipShape(RoundedRectangle(cornerRadius: 26, style:.continuous))
+                    .shadow(color: Color.black.opacity(0.15), radius: 20, x: 0, y: 20)
+                    .padding(.horizontal, 36)
+                    
+                    VStack {
+                        Text(isSignUp ? "有账号,去登陆→" : "没有账号? 先去创建 →").font(.body).padding()
+                            .onTapGesture {
+                                self.isSignUp = !self.isSignUp
+                        }
+                        Button(action: {
+                            if self.isSignUp {
+                                self.signup()
+                            } else {
+                                self.login()
+                            }
+                        }) {
+                            Text(self.isSignUp ? "Sign up" : "Log in").foregroundColor(.white)
+                        }
+                        .padding(12)
+                        .padding(.horizontal, 30)
+                        .background(Color(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)))
+                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                        .shadow(color: Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)).opacity(0.3), radius: 20, x: 0, y: 20)
+                        .alert(isPresented: $showAlert) {
+                            Alert(title: Text("Error"), message: Text(self.alertMessage), dismissButton: .default(Text("OK")))
+                            }.frame(maxWidth: .infinity)
                     }
+                    .frame(maxWidth:.infinity, alignment: .bottom)
+                    .padding(.top, 10)
+                    .padding(.bottom, 20)
                 }
-                .frame(maxWidth:.infinity,maxHeight: .infinity, alignment: .bottom)
-                .padding()
             }
             .clipShape(RoundedRectangle(cornerRadius: 30, style:.continuous))
-            .offset(y: isFocused ? -300 : 0)
+            .offset(y: isFocused ? -300 : 0) // 呼出键盘,向上抬起
             .animation(.easeInOut)
             .onTapGesture {
                 self.isFocused = false
@@ -187,7 +228,7 @@ struct LoginView: View {
                 LoadingView()
             }
             if isSuccessful {
-                SuccessView()
+                SuccessView(text: self.isSignUp ? "注册中..." : "登录中...")
             }
         }
     }

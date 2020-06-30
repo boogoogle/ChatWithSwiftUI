@@ -47,7 +47,7 @@ struct DanceGround: View {
                 ForEach(viewModel.convHistoryGroup.numbered(), id: \.element.self) { (num, msgList) in
                     VStack{
                         DanceGroundQuickConvCard(messageList: msgList)
-                    }.offset(x: CGFloat(20 * num) - 20, y: CGFloat(40 * num))
+                    }.offset(x: CGFloat(20 * num) - 20)
                 }
             }
             
