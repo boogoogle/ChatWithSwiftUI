@@ -32,8 +32,19 @@ struct LCRest {
                 
                 let dataJ = JSON(parseJSON: withJson["data"].rawValue as! String)
                 let lcText = dataJ["_lctext"].string ?? ""
+                let lcType = dataJ["_lctype"].int ?? -1
+                var imgUrl = ""
                 
-                return MessageFromConvHistoryModel(msgId: msgId, convId: convId, timestamp: timestamp, lcText: lcText,from:from)
+                // 处理图片消息
+                if lcType == -2 {
+                    let lcfileDataJ = dataJ["_lcfile"]
+                    imgUrl = lcfileDataJ["url"].string ?? ""
+                    print(imgUrl, "imgUrl")
+                }
+                
+
+                
+                return MessageFromConvHistoryModel(msgId: msgId, convId: convId, timestamp: timestamp, lcText: lcText,from:from, imgUrl: imgUrl, lcType: lcType)
             }
             
             for (_,subJson):(String, JSON) in json {

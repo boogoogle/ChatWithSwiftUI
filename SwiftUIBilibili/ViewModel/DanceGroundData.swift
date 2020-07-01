@@ -11,6 +11,6 @@ import SwiftUI
 import LeanCloud
 
 final class DanceGroundData: ObservableObject {
-//    @Published var convHistoryGroup = [String: [IMMessage]]()
-    @Published var convHistoryGroup = [[MessageFromConvHistoryModel]]()
+    
+//    @Published var convHistoryGroupMap = Dictionary<String, [MessageFromConvHistoryModel]>()
 }

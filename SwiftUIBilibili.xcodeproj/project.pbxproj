@@ -50,6 +50,7 @@
 		F8A19CA22498BDF6004056D1 /* HomeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19CA02498BDF6004056D1 /* HomeList.swift */; };
 		F8D2299F24A83FCB001F7EAB /* MessageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2299E24A83FCB001F7EAB /* MessageWrapper.swift */; };
 		F8D229A124A8921A001F7EAB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229A024A8921A001F7EAB /* ImagePicker.swift */; };
+		F8D229A524AB595B001F7EAB /* ConversationDetail4Vistor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229A424AB595A001F7EAB /* ConversationDetail4Vistor.swift */; };
 		F8F28680249A093A00B6AC05 /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = F8F2867F249A093A00B6AC05 /* success.json */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +102,7 @@
 		F8A19CA02498BDF6004056D1 /* HomeList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeList.swift; sourceTree = "<group>"; };
 		F8D2299E24A83FCB001F7EAB /* MessageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageWrapper.swift; sourceTree = "<group>"; };
 		F8D229A024A8921A001F7EAB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		F8D229A424AB595A001F7EAB /* ConversationDetail4Vistor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetail4Vistor.swift; sourceTree = "<group>"; };
 		F8F2867F249A093A00B6AC05 /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +166,7 @@
 				F85FDEF4249B44820066E816 /* MessageInputer.swift */,
 				F8813F6C24A3625500E4201D /* ImageMessageCell.swift */,
 				F8D2299E24A83FCB001F7EAB /* MessageWrapper.swift */,
+				F8D229A424AB595A001F7EAB /* ConversationDetail4Vistor.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				F85FDF05249B454C0066E816 /* Data.swift in Sources */,
 				F8A19C8C2498BD8E004056D1 /* ContentView.swift in Sources */,
 				F85FDEFF249B44F80066E816 /* NormalConversationListCell.swift in Sources */,
+				F8D229A524AB595B001F7EAB /* ConversationDetail4Vistor.swift in Sources */,
 				F8813F35249F393600E4201D /* DanceGroundBottomCardView.swift in Sources */,
 				F85FDEFA249B44820066E816 /* MessageInputer.swift in Sources */,
 				F85FDEE7249A0FC60066E816 /* BlurView.swift in Sources */,

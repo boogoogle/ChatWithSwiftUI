@@ -18,5 +18,7 @@ struct MessageFromConvHistoryModel: Hashable {
     var timestamp: String
     var lcText: String
     var from: String
+    var imgUrl: String
+    var lcType: Int
 }
 

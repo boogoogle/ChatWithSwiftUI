@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import URLImage
+import Foundation
 
 struct DanceGroundQuickConvCard: View {
     var messageList: [MessageFromConvHistoryModel]
@@ -17,8 +19,23 @@ struct DanceGroundQuickConvCard: View {
                 HStack(alignment: .top) {
                     Text("\(m.from):")
                         .font(.subheadline)
-                    Text(m.lcText)
-                        .font(.body)
+
+                    if m.lcType == -1 {
+                        Text(m.lcText)
+                            .font(.body)
+                    }
+                    if (m.imgUrl != ""){
+                        URLImage(
+                            URL(string: m.imgUrl)!,
+                            processors: [ Resize(size: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale) ],
+                            content: {
+                                $0.image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+                        }).frame(width: 100.0,height: 100.0)
+                        
+                    }
                     Spacer()
                 }
                 .foregroundColor(.black)
@@ -42,7 +59,10 @@ let msg = MessageFromConvHistoryModel(
     convId: "5eef00a10d3a42c5fda6b448",
     timestamp: "1592813212675",
     lcText: "How are you how are you,",
-    from: "Boo@B.b")
+    from: "Boo@B.b",
+    imgUrl: "http://lc-fnjUKhQv.cn-n1.lcfile.com/9e07f0754c0944e6ab1bce164e005610",
+    lcType: -2// -1文本, -2图片
+)
 
 var list : [MessageFromConvHistoryModel] = [msg, msg,msg,msg,msg]
 

@@ -10,7 +10,7 @@ import SwiftUI
 import LeanCloud
 
 struct DanceGroundBottomCardView: View {
-    @State var friendEmail: String = "B@b.b"
+    @State var friendEmail: String = ""
     @State var showDetail: Bool = false
     @State var showMoreModel: Bool = false
     //    @EnvironmentObject var conversationDetailData: ConversationDetailData

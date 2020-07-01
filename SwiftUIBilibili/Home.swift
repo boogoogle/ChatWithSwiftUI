@@ -10,25 +10,25 @@ import SwiftUI
 import LeanCloud
 
 struct Home: View {
+    
     @State var show = false // 当前组件的状态
     @State var showProfile = false // 是否显示DanceGround
-    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var userData: UserStore
+    
     
     var body: some View {
         ZStack() {
             DanceGround()
                 .background(Color.white)
                 .animation(.spring())
-                .environmentObject(DanceGroundData())
-            MenuButton(show: $show)
-                .animation(.spring())
-                .offset(x: -60, y:showProfile ? 60 : 5)
-            MenuRight(show: $showProfile)
-                .animation(.spring())
-                .offset(x: -30, y:showProfile ? 70 : 30)
-            MenuView(show: $show) // 通过 $符号实现双向数据绑定
+                .environmentObject(userData)
+            if !userData.hideBottomCardAndMenuBtn {
+                MenuRight(show: $showProfile)
+                    .animation(.spring())
+                    .offset(x: -30, y:showProfile ? 70 : 30)
+            }
             
-            if user.showLogin  {
+            if userData.showLogin {
                 ZStack {
                     LoginView()
                     VStack {
@@ -36,13 +36,16 @@ struct Home: View {
                             Spacer()
                             CircleButton(icon: "xmark")
                                 .onTapGesture {
-                                    self.user.showLogin = false
+                                    self.userData.showLogin = false
                             }
                         }
                         Spacer()
                     }.padding()
                 }
+            } else {
+                MenuView(show: $showProfile) // 通过 $符号实现双向数据绑定
             }
+            
         }
     }
 }
@@ -83,7 +86,7 @@ let menuData = [
 struct MenuView: View {
     var menu = menuData
     @Binding var show: Bool   // 从父组件监听状态的改变
-    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var userData: UserStore
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(menu) { item in
@@ -93,7 +96,7 @@ struct MenuView: View {
                 .onTapGesture {
                     LCUser.logOut()
                     UserDefaults.standard.set(false, forKey: "isLogged")
-                    self.user.isLogged = false
+                    self.userData.isLogged = false
                     self.show = false
             }
             Spacer()
@@ -152,14 +155,14 @@ struct MenuButton: View {
 
 struct MenuRight: View {
     @Binding var show: Bool
-    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var userData: UserStore
     
     let lc_user_email: String = LCApplication.default.currentUser?.email!.rawValue as? String ?? "No Email"
     
     var body: some View {
         ZStack(alignment:.topTrailing) {
             HStack(alignment: .center) {
-                if user.isLogged {
+                if userData.isLogged {
                     Text(lc_user_email)
                     Button(action: {self.show.toggle()}){
                         CircleButton(icon: "person.crop.circle")
@@ -167,7 +170,7 @@ struct MenuRight: View {
                 } else {
                     Text("未登录")
                         .foregroundColor(Color.red)
-                    Button(action: {self.user.showLogin = true}){
+                    Button(action: {self.userData.showLogin = true}){
                         CircleButton(icon: "person.crop.circle.badge.exclam")
                     }
                 }
