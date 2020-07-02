@@ -12,8 +12,6 @@ import LeanCloud
 struct DanceGroundBottomCardView: View {
     @State var friendEmail: String = ""
     @State var showDetail: Bool = false
-    @State var showMoreModel: Bool = false
-    //    @EnvironmentObject var conversationDetailData: ConversationDetailData
     @State var convsersationDetail = ConversationDetail()
     @State var unreadMessageCount = 0
     
@@ -46,6 +44,7 @@ struct DanceGroundBottomCardView: View {
                     case .success(value: let conversation):
                         LCClient.currentConversation = conversation
                         self.showDetail = true
+                        print("showDetail", self.showDetail)
                     case .failure(error: let error):
                         print(error)
                         break
@@ -121,49 +120,46 @@ struct DanceGroundBottomCardView: View {
     }
     
     var body: some View {
-        VStack(spacing: 20.0) {
-            Rectangle()
-                .frame(width: 60, height: 6)
-                .cornerRadius(3.0)
-                .opacity(0.1)
-                .onTapGesture {
-                    self.showMoreModel = !self.showMoreModel
-            }
-            
-            VStack(alignment: .leading){
-                Text("未读消息: \(self.unreadMessageCount)")
-                if LCClient.currentConversation != nil && self.unreadMessageCount > 0 {
-                    NormalConversationListCell(conversation: LCClient.currentConversation)
-                        .onTapGesture {
-                            self.showDetail = true
+        
+            VStack(spacing: 20.0) {
+//                Rectangle()
+//                    .frame(width: 60, height: 6)
+//                    .cornerRadius(3.0)
+//                    .opacity(0.1)
+                
+                VStack(alignment: .leading){
+                    Text("未读消息: \(self.unreadMessageCount)")
+                    if LCClient.currentConversation != nil && self.unreadMessageCount > 0 {
+                        NormalConversationListCell(conversation: LCClient.currentConversation)
+                            .onTapGesture {
+                                self.showDetail = true
+                        }
                     }
                 }
-            }
-            
-            Text("和朋友荡起双桨?")
-            HStack {
-                TextField("输入对方id畅所欲言", text: $friendEmail)
-                Button(action:{
-                    self.createNormalConversation()
-                }){
-                    Text("发起")
-                }.sheet(isPresented: $showDetail){
-                    self.convsersationDetail.environmentObject(ConversationDetailData())
+                
+                Text("和朋友荡起双桨?")
+                HStack {
+                    TextField("输入对方id畅所欲言", text: $friendEmail)
+                    NavigationLink(destination: self.convsersationDetail.environmentObject(ConversationDetailData())){
+                        Button(action:{
+                            self.createNormalConversation()
+                        }){
+                            Text("发起")
+                        }
+                    }
                 }
+                    
+                
+                Spacer()
             }
-            
-            Spacer()
-        }
             .frame(minWidth: 0, maxWidth: .infinity) // 使之宽度全屏
             .padding()
             .padding(.horizontal)
             .background(Color.white)// 这里不设置background,下面的shadow看不出来
-            .cornerRadius(30)
-            .shadow(radius: 20)
-            .offset(y: showMoreModel ? screenHeight * 1/3 : screenHeight * 3/4)
-            .layoutPriority(22.0)
             .onAppear(){
                 self.initIMClient()
+            
         }
+        
     }
 }

@@ -15,34 +15,36 @@ struct DanceGroundQuickConvCard: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            ForEach(messageList, id: \.msgId){ m in
-                HStack(alignment: .top) {
-                    Text("\(m.from):")
-                        .font(.subheadline)
+            ScrollView{
+                ForEach(messageList, id: \.msgId){ m in
+                    HStack(alignment: .top) {
+                        Text("\(m.from):")
+                            .font(.subheadline)
 
-                    if m.lcType == -1 {
-                        Text(m.lcText)
-                            .font(.body)
+                        if m.lcType == -1 {
+                            Text(m.lcText)
+                                .font(.body)
+                        }
+                        if (m.imgUrl != ""){
+                            URLImage(
+                                URL(string: m.imgUrl)!,
+                                processors: [ Resize(size: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale) ],
+                                content: {
+                                    $0.image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipped()
+                            }).frame(width: 100.0,height: 100.0)
+                            
+                        }
+                        Spacer()
                     }
-                    if (m.imgUrl != ""){
-                        URLImage(
-                            URL(string: m.imgUrl)!,
-                            processors: [ Resize(size: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale) ],
-                            content: {
-                                $0.image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                        }).frame(width: 100.0,height: 100.0)
-                        
-                    }
-                    Spacer()
+                    .foregroundColor(.black)
+                    .frame(maxWidth: .infinity)
+                    .padding()
                 }
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity)
-                .padding()
+                Spacer()
             }
-            Spacer()
         }
         .frame(width: 280.0, height: 420.0)
         .padding()

@@ -14,6 +14,7 @@ struct DanceGround: View {
     @State var conversations = [IMConversation]()
     @State var convObjList = [LCObject]()
     @State var showConvDetail = false
+    @State var selectedConvId = ""
     
     @EnvironmentObject var viewModel: UserStore
     
@@ -33,7 +34,8 @@ struct DanceGround: View {
         for conv in self.convObjList {
             let convId = conv.objectId!.rawValue as! String
             // 使用Conversation的id获取最新的几条消息
-            LCRest.getConversationHistoryById(id: convId,callback: {list in
+            let params = ["limit":"6"]
+            LCRest.getConversationHistoryById(id: convId, params: params, callback: {list in
                 self.viewModel.convHistoryGroup.append(list)
             })
         }
@@ -52,6 +54,7 @@ struct DanceGround: View {
                                 DanceGroundQuickConvCard(messageList: msgList)
                                     .gesture(TapGesture().onEnded{
                                         self.viewModel.hideBottomCardAndMenuBtn = true
+                                        self.selectedConvId = msgList[0].convId
                                         self.showConvDetail = true
                                     })
                             }
@@ -60,16 +63,14 @@ struct DanceGround: View {
                     }.padding(20)
                 }
             }
-            if !viewModel.hideBottomCardAndMenuBtn {
-                DanceGroundBottomCardView().animation(.easeInOut)
-            }
         }
         .onAppear{
             self.getConversations()
-        }.sheet(isPresented: $showConvDetail, onDismiss: {
+        }
+        .sheet(isPresented: $showConvDetail, onDismiss: {
             self.viewModel.hideBottomCardAndMenuBtn = false
         }){
-            ConversationDetail4Vistor()
+            ConversationDetail4Vistor(convId: self.selectedConvId)
         }
     }
 }

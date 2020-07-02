@@ -15,9 +15,10 @@ struct MessageWrapper: View {
     var isSelf: Bool
     var isImageMessage: Bool = false
     
-    init(message: IMMessage) {
+    init(_ message: IMMessage) {
         self.message = message
-        self.isSelf = LCApplication.default.currentUser?.email?.stringValue == message.fromClientID!.stringValue
+//        self.isSelf = LCApplication.default.currentUser?.email?.stringValue == message.fromClientID!.stringValue
+        self.isSelf = message.ioType == .out
         if ((message as? IMImageMessage) != nil) {
             self.isImageMessage = true
         }
@@ -75,7 +76,7 @@ let message = IMImageMessage()
 
 struct MessageWrapper_Previews: PreviewProvider {
     static var previews: some View {
-        MessageWrapper(message: message as IMMessage)
+        MessageWrapper(message as IMMessage)
     }
 }
 #endif

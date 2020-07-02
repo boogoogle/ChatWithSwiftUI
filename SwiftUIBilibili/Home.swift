@@ -27,7 +27,6 @@ struct Home: View {
                     .animation(.spring())
                     .offset(x: -30, y:showProfile ? 70 : 30)
             }
-            
             if userData.showLogin {
                 ZStack {
                     LoginView()
@@ -108,11 +107,11 @@ struct MenuView: View {
         .cornerRadius(30)
         .padding(.trailing, 60)
         .shadow(radius: 20)
-            .rotation3DEffect(Angle(degrees: show ? 0 :30), axis: (x: 0, y: 10, z: 0)) // 这里axis的每个维度,值为1, 10, 100 没啥区别啊???
-            .animation(.easeInOut) // 括号内是动画执行类型,
-            .offset(x: show ? 0 : -MAINWIDTH)
-            .onTapGesture {
-                self.show.toggle()
+        .rotation3DEffect(Angle(degrees: show ? 0 :30), axis: (x: 0, y: 10, z: 0)) // 这里axis的每个维度,值为1, 10, 100 没啥区别啊???
+        .animation(.easeInOut) // 括号内是动画执行类型,
+        .offset(x: show ? 0 : -MAINWIDTH)
+        .onTapGesture {
+            self.show.toggle()
         }
     }
 }

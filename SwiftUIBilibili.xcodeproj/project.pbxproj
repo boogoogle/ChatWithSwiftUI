@@ -47,10 +47,12 @@
 		F8A19C9C2498BDB2004056D1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C9B2498BDB2004056D1 /* LoginView.swift */; };
 		F8A19C9E2498BDE6004056D1 /* DanceGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C9D2498BDE6004056D1 /* DanceGround.swift */; };
 		F8A19CA12498BDF6004056D1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C9F2498BDF6004056D1 /* Home.swift */; };
-		F8A19CA22498BDF6004056D1 /* HomeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19CA02498BDF6004056D1 /* HomeList.swift */; };
 		F8D2299F24A83FCB001F7EAB /* MessageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2299E24A83FCB001F7EAB /* MessageWrapper.swift */; };
 		F8D229A124A8921A001F7EAB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229A024A8921A001F7EAB /* ImagePicker.swift */; };
 		F8D229A524AB595B001F7EAB /* ConversationDetail4Vistor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229A424AB595A001F7EAB /* ConversationDetail4Vistor.swift */; };
+		F8D229A724ACB1ED001F7EAB /* ApiByLCQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229A624ACB1ED001F7EAB /* ApiByLCQuery.swift */; };
+		F8D229A924ADFAF8001F7EAB /* BottomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229A824ADFAF8001F7EAB /* BottomTabView.swift */; };
+		F8D229AB24ADFC97001F7EAB /* MyConversations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229AA24ADFC97001F7EAB /* MyConversations.swift */; };
 		F8F28680249A093A00B6AC05 /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = F8F2867F249A093A00B6AC05 /* success.json */; };
 /* End PBXBuildFile section */
 
@@ -99,10 +101,12 @@
 		F8A19C9B2498BDB2004056D1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F8A19C9D2498BDE6004056D1 /* DanceGround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanceGround.swift; sourceTree = "<group>"; };
 		F8A19C9F2498BDF6004056D1 /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		F8A19CA02498BDF6004056D1 /* HomeList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeList.swift; sourceTree = "<group>"; };
 		F8D2299E24A83FCB001F7EAB /* MessageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageWrapper.swift; sourceTree = "<group>"; };
 		F8D229A024A8921A001F7EAB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F8D229A424AB595A001F7EAB /* ConversationDetail4Vistor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetail4Vistor.swift; sourceTree = "<group>"; };
+		F8D229A624ACB1ED001F7EAB /* ApiByLCQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiByLCQuery.swift; sourceTree = "<group>"; };
+		F8D229A824ADFAF8001F7EAB /* BottomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabView.swift; sourceTree = "<group>"; };
+		F8D229AA24ADFC97001F7EAB /* MyConversations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyConversations.swift; sourceTree = "<group>"; };
 		F8F2867F249A093A00B6AC05 /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				F8813F5B24A1D6C700E4201D /* LCRest.swift */,
+				F8D229A624ACB1ED001F7EAB /* ApiByLCQuery.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -295,7 +300,6 @@
 				F85FDEED249B44820066E816 /* Message */,
 				F85FDEEA249B403E0066E816 /* Capabilities */,
 				F8A19C9F2498BDF6004056D1 /* Home.swift */,
-				F8A19CA02498BDF6004056D1 /* HomeList.swift */,
 				F8A19C9D2498BDE6004056D1 /* DanceGround.swift */,
 				F8A19C872498BD8E004056D1 /* AppDelegate.swift */,
 				F8A19C892498BD8E004056D1 /* SceneDelegate.swift */,
@@ -313,6 +317,8 @@
 				F84A412B249A07020044D50D /* SuccessView.swift */,
 				F84A4129249A046B0044D50D /* CartoonView.swift */,
 				F8813F34249F393600E4201D /* DanceGroundBottomCardView.swift */,
+				F8D229A824ADFAF8001F7EAB /* BottomTabView.swift */,
+				F8D229AA24ADFC97001F7EAB /* MyConversations.swift */,
 			);
 			path = SwiftUIBilibili;
 			sourceTree = "<group>";
@@ -446,7 +452,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F85FDF06249B454C0066E816 /* NormalConversationModel.swift in Sources */,
-				F8A19CA22498BDF6004056D1 /* HomeList.swift in Sources */,
 				F8A19C882498BD8E004056D1 /* AppDelegate.swift in Sources */,
 				F8A19C8A2498BD8E004056D1 /* SceneDelegate.swift in Sources */,
 				F8813F5C24A1D6C700E4201D /* LCRest.swift in Sources */,
@@ -462,6 +467,7 @@
 				F85FDEE7249A0FC60066E816 /* BlurView.swift in Sources */,
 				F8A19CA12498BDF6004056D1 /* Home.swift in Sources */,
 				F8D2299F24A83FCB001F7EAB /* MessageWrapper.swift in Sources */,
+				F8D229A924ADFAF8001F7EAB /* BottomTabView.swift in Sources */,
 				F8A19C9E2498BDE6004056D1 /* DanceGround.swift in Sources */,
 				F8D229A124A8921A001F7EAB /* ImagePicker.swift in Sources */,
 				F8813F6D24A3625500E4201D /* ImageMessageCell.swift in Sources */,
@@ -473,6 +479,7 @@
 				F8813F6824A32A5E00E4201D /* DanceGroundQuickConvCard.swift in Sources */,
 				F84A412C249A07020044D50D /* SuccessView.swift in Sources */,
 				F84A4124249A01040044D50D /* LottieView.swift in Sources */,
+				F8D229A724ACB1ED001F7EAB /* ApiByLCQuery.swift in Sources */,
 				F85FDF04249B454C0066E816 /* MessageFromConvHistoryModel.swift in Sources */,
 				F8813F6B24A35E7700E4201D /* SwiftExtension.swift in Sources */,
 				F84A4126249A02900044D50D /* LoadingView.swift in Sources */,
@@ -480,6 +487,7 @@
 				F84A412A249A046B0044D50D /* CartoonView.swift in Sources */,
 				F85FDEE9249A27240066E816 /* UserStore.swift in Sources */,
 				F8813F5924A1D08400E4201D /* DeviceDefine.swift in Sources */,
+				F8D229AB24ADFC97001F7EAB /* MyConversations.swift in Sources */,
 				F85FDEEC249B409A0066E816 /* LCClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

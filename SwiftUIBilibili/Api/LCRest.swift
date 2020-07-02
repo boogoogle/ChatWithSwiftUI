@@ -6,14 +6,21 @@
 //  Copyright © 2020 boo. All rights reserved.
 //
 
-//import Foundation
 import SwiftyJSON
 
-
+/**
+      使用LeanCloud提供的rest接口获取数据
+        接口返回数据的格式和sdk中的IMMessage不一样,需要自己重新定义
+ */
 struct LCRest {
-    public static func getConversationHistoryById(id: String, callback: @escaping (_ result : [MessageFromConvHistoryModel]) -> ()){
+    // 针对DanceGround页面中的聊天卡片,因为数据结构不一样,所以特殊处理一下
+    public static func getConversationHistoryById(
+        id: String,
+        params: Dictionary<String, String>?,
+        callback: @escaping (_ result : [MessageFromConvHistoryModel]) -> ()
+    ){
         let url = "/1.2/rtm/conversations/\(id)/messages"
-        let params = ["limit":"5"]
+        let params = params ?? ["limit":"5"]
         NetworkManager.requestData(.get, urlString: url,parameters: params, finishedCallback: { (data:String) in
 //            dPrint("jsonBefore",data)
             
@@ -41,9 +48,6 @@ struct LCRest {
                     imgUrl = lcfileDataJ["url"].string ?? ""
                     print(imgUrl, "imgUrl")
                 }
-                
-
-                
                 return MessageFromConvHistoryModel(msgId: msgId, convId: convId, timestamp: timestamp, lcText: lcText,from:from, imgUrl: imgUrl, lcType: lcType)
             }
             
