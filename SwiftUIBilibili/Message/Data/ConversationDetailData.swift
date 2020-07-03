@@ -17,9 +17,6 @@ final class ConversationDetailData: ObservableObject {
     func sendMsg(message: IMMessage) {
         do{
             try LCClient.currentConversation.send(message: message, completion: {[self] (result) in
-                //                guard let self = self else {
-                //                    return
-                //                }
                 switch result {
                     case .success:
                         self.messages.append(message)
@@ -33,8 +30,5 @@ final class ConversationDetailData: ObservableObject {
             print(error)
         }
     }
-//    func addObserverForClient(){
-//
-//    }
 }
 

@@ -32,9 +32,6 @@ struct Home: View {
                 trailing:MenuRight(show: $showProfile)
             )
             
-            
-            
-
             if !userData.hideBottomCardAndMenuBtn {
                 MenuRight(show: $showProfile)
                     .animation(.spring())

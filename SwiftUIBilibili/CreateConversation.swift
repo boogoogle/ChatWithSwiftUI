@@ -13,7 +13,7 @@ struct CreateConversation: View {
     @State var friendEmail: String = ""
     @State var showDetail: Bool = false
     @State var convsersationDetail = ConversationDetail()
-    @State var unreadMessageCount = 0
+    @EnvironmentObject var globalData: GlobalData
     
     let uuid = UUID().uuidString
     let screenHeight = UIScreen.main.bounds.height
@@ -45,6 +45,7 @@ struct CreateConversation: View {
                         LCClient.currentConversation = conversation
                         self.showDetail = true
                         print("showDetail", self.showDetail)
+                        self.addObserverForClient()
                     case .failure(error: let error):
                         print(error)
                         break
@@ -55,45 +56,8 @@ struct CreateConversation: View {
         }
     }
     
-    func initIMClient(){
-        do {
-            let clientId: String = LCApplication.default.currentUser?.email!.rawValue as? String ?? ""
-            if clientId != ""{
-                print("initIMClient, 当前登录用户的Email是: ", clientId)
-            }
-            let client = try IMClient(
-                ID: clientId,
-                delegate: LCClient.delegator,
-                eventQueue: LCClient.queue
-            )
-            self.open(client: client)
-        } catch {
-            print(error)
-        }
-        
-    }
-    func open(client: IMClient){
-        print("open")
-        client.open { (result) in
-            print("IMClient open 结果",result)
-            switch result {
-                case .success:
-                    LCClient.current = client
-                    self.addObserverForClient()
-                    break
-                case .failure(error: let error):
-                    print(error)
-            }
-        }
-    }
-    
     func addObserverForClient() {
-        print("addstart")
         LCClient.addEventObserver(key: self.uuid) {(client, conversation, event) in
-            
-//            guard type(of: conversation) == IMConversation.self, let self = self else {
-//                return
-//            }
             switch event {
                 case .left(byClientID: _, at: _):
                     self.handleConversationEventLeft(conversation: conversation, client: client)
@@ -114,7 +78,7 @@ struct CreateConversation: View {
     }
     func handleConversationEventUnreadMessageCountUpdated(conversation: IMConversation) {
         LCClient.currentConversation = conversation
-        self.unreadMessageCount = conversation.unreadMessageCount
+        self.globalData.unreadMessageCount = conversation.unreadMessageCount
         print(conversation.unreadMessageCount, "unread---")
     }
     
@@ -127,8 +91,8 @@ struct CreateConversation: View {
 //                    .opacity(0.1)
                 
                 VStack(alignment: .leading){
-                    Text("未读消息: \(self.unreadMessageCount)")
-                    if LCClient.currentConversation != nil && self.unreadMessageCount > 0 {
+                    Text("未读消息: \(self.globalData.unreadMessageCount)")
+                    if LCClient.currentConversation != nil && self.globalData.unreadMessageCount > 0 {
                         NormalConversationListCell(conversation: LCClient.currentConversation)
                             .onTapGesture {
                                 self.showDetail = true
@@ -139,26 +103,19 @@ struct CreateConversation: View {
                 Text("和朋友荡起双桨?")
                 HStack {
                     TextField("输入对方id畅所欲言", text: $friendEmail)
-                    NavigationLink(destination: self.convsersationDetail.environmentObject(ConversationDetailData())){
-                        Button(action:{
-                            self.createNormalConversation()
-                        }){
-                            Text("发起")
-                        }
+                    Button(action:{
+                        self.createNormalConversation()
+                    }){
+                        Text("发起").foregroundColor(.blue)
+                    }.sheet(isPresented: $showDetail){
+                        self.convsersationDetail.environmentObject(ConversationDetailData())
                     }
                 }
-                    
-                
                 Spacer()
             }
             .frame(minWidth: 0, maxWidth: .infinity) // 使之宽度全屏
             .padding()
             .padding(.horizontal)
             .background(Color.white)// 这里不设置background,下面的shadow看不出来
-            .onAppear(){
-                self.initIMClient()
-            
-        }
-        
     }
 }

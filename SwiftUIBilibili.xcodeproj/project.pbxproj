@@ -54,6 +54,7 @@
 		F8D229A924ADFAF8001F7EAB /* BottomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229A824ADFAF8001F7EAB /* BottomTabView.swift */; };
 		F8D229AB24ADFC97001F7EAB /* MyConversations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229AA24ADFC97001F7EAB /* MyConversations.swift */; };
 		F8D229AD24AF02B5001F7EAB /* LCQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229AC24AF02B5001F7EAB /* LCQueryService.swift */; };
+		F8D229AF24AF1806001F7EAB /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229AE24AF1806001F7EAB /* GlobalData.swift */; };
 		F8F28680249A093A00B6AC05 /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = F8F2867F249A093A00B6AC05 /* success.json */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,7 @@
 		F8D229A824ADFAF8001F7EAB /* BottomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabView.swift; sourceTree = "<group>"; };
 		F8D229AA24ADFC97001F7EAB /* MyConversations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyConversations.swift; sourceTree = "<group>"; };
 		F8D229AC24AF02B5001F7EAB /* LCQueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LCQueryService.swift; sourceTree = "<group>"; };
+		F8D229AE24AF1806001F7EAB /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
 		F8F2867F249A093A00B6AC05 /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				F8813F6024A1FE4500E4201D /* DanceGroundData.swift */,
+				F8D229AE24AF1806001F7EAB /* GlobalData.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				F8813F5C24A1D6C700E4201D /* LCRest.swift in Sources */,
 				F85FDEFE249B44F80066E816 /* NormalConversationListView.swift in Sources */,
 				F8A19C9C2498BDB2004056D1 /* LoginView.swift in Sources */,
+				F8D229AF24AF1806001F7EAB /* GlobalData.swift in Sources */,
 				F85FDEF9249B44820066E816 /* ConversationDetailData.swift in Sources */,
 				F85FDF05249B454C0066E816 /* Data.swift in Sources */,
 				F8A19C8C2498BD8E004056D1 /* ContentView.swift in Sources */,
