@@ -13,7 +13,7 @@ struct ConversationDetail: View {
     
     @EnvironmentObject private var conversationDetainData: ConversationDetailData
     @State var isInputerFocus = false
-    @State var textMsg =  "Say something"
+    @State var textMsg =  ""
     @State var conversation:  IMConversation! = LCClient.currentConversation
     @State var messages = [IMMessage]()
     

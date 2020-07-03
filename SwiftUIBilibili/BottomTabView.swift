@@ -28,17 +28,54 @@ struct BottomTabView: View {
         }
     }
     func open(client: IMClient){
-        print("open")
         client.open { (result) in
-            print("IMClient open 结果",result)
             switch result {
                 case .success:
                     LCClient.current = client
+                    self.addObserverForClient()
                     break
                 case .failure(error: let error):
                     print(error)
             }
         }
+    }
+    func addObserverForClient() {
+        let uuid = UUID().uuidString
+        LCClient.addEventObserver(key: uuid) {(client, conversation, event) in
+            switch event {
+                case .left(byClientID: _, at: _):
+                    self.handleConversationEventLeft(conversation: conversation, client: client)
+                case .lastMessageUpdated(newMessage: let isNewMessage):
+                    self.handleConversationEventLastMessageUpdated(conversation: conversation, isNewMessage: isNewMessage)
+                case .unreadMessageCountUpdated:
+                    self.handleConversationEventUnreadMessageCountUpdated(conversation: conversation)
+                default:
+                    break
+            }
+        }
+    }
+    func handleConversationEventLeft(conversation: IMConversation, client: IMClient) {
+        
+    }
+    func handleConversationEventLastMessageUpdated(conversation: IMConversation, isNewMessage: Bool) {
+//        print("lastmessageUpdated", isNewMessage)
+        var isIn = false
+        for(index,conv) in LCClient.currentConversationList.numbered() {
+            if(conv.ID == conversation.ID) {
+                LCClient.currentConversationList[index - 1] = conversation
+                isIn = true
+                break
+            }
+        }
+        
+        if !isIn {
+            LCClient.currentConversationList.append(conversation)
+        }
+    }
+    func handleConversationEventUnreadMessageCountUpdated(conversation: IMConversation) {
+        self.globalData.unreadMessageCount = conversation.unreadMessageCount
+        print(conversation.unreadMessageCount, "unread---")
+        
     }
     var body: some View {
         TabView {
@@ -49,7 +86,10 @@ struct BottomTabView: View {
             MyConversations()
             .tabItem {
                 Image(systemName: "quote.bubble.fill")
-                Text("我的 \(globalData.unreadMessageCount)")
+                HStack{
+                    Text("我的\(globalData.unreadMessageCount)")
+                }
+                
             }
         }.onAppear{
             self.initIMClient()

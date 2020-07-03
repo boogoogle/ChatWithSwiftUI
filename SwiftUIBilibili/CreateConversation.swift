@@ -15,7 +15,6 @@ struct CreateConversation: View {
     @State var convsersationDetail = ConversationDetail()
     @EnvironmentObject var globalData: GlobalData
     
-    let uuid = UUID().uuidString
     let screenHeight = UIScreen.main.bounds.height
     
     func createNormalConversation(){
@@ -45,7 +44,6 @@ struct CreateConversation: View {
                         LCClient.currentConversation = conversation
                         self.showDetail = true
                         print("showDetail", self.showDetail)
-                        self.addObserverForClient()
                     case .failure(error: let error):
                         print(error)
                         break
@@ -56,34 +54,7 @@ struct CreateConversation: View {
         }
     }
     
-    func addObserverForClient() {
-        LCClient.addEventObserver(key: self.uuid) {(client, conversation, event) in
-            switch event {
-                case .left(byClientID: _, at: _):
-                    self.handleConversationEventLeft(conversation: conversation, client: client)
-                case .lastMessageUpdated(newMessage: let isNewMessage):
-                    self.handleConversationEventLastMessageUpdated(conversation: conversation, isNewMessage: isNewMessage)
-                case .unreadMessageCountUpdated:
-                    self.handleConversationEventUnreadMessageCountUpdated(conversation: conversation)
-                default:
-                    break
-            }
-        }
-    }
-    func handleConversationEventLeft(conversation: IMConversation, client: IMClient) {
-        
-    }
-    func handleConversationEventLastMessageUpdated(conversation: IMConversation, isNewMessage: Bool) {
-        
-    }
-    func handleConversationEventUnreadMessageCountUpdated(conversation: IMConversation) {
-        LCClient.currentConversation = conversation
-        self.globalData.unreadMessageCount = conversation.unreadMessageCount
-        print(conversation.unreadMessageCount, "unread---")
-    }
-    
     var body: some View {
-        
             VStack(spacing: 20.0) {
 //                Rectangle()
 //                    .frame(width: 60, height: 6)
@@ -92,10 +63,13 @@ struct CreateConversation: View {
                 
                 VStack(alignment: .leading){
                     Text("未读消息: \(self.globalData.unreadMessageCount)")
-                    if LCClient.currentConversation != nil && self.globalData.unreadMessageCount > 0 {
-                        NormalConversationListCell(conversation: LCClient.currentConversation)
-                            .onTapGesture {
-                                self.showDetail = true
+                    if LCClient.currentConversationList.count > 0 {
+                        List(LCClient.currentConversationList , id: \.ID) { conv in
+                            NormalConversationListCell(conversation: conv)
+                                .onTapGesture {
+                                    LCClient.currentConversation = conv
+                                    self.showDetail = true
+                            }
                         }
                     }
                 }

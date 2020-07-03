@@ -17,6 +17,8 @@ class LCClient {
     
     static var currentConversation: IMConversation!
     
+    static var currentConversationList = [IMConversation]()
+    
     static var eventObserverMap: [String: (IMClient, IMConversation, IMConversationEvent) -> Void] = [:]
     
     static let queue = DispatchQueue(label: "\(LCClient.self).queue")
@@ -36,20 +38,7 @@ extension LCClient: IMClientDelegate {
     }
     
     func client(_ client: IMClient, conversation: IMConversation, event: IMConversationEvent) {
-//        switch event {
-//            case .message(event: let messageEvent):
-//                switch messageEvent {
-//                    case .received(message: let message):
-//                        print("=====================",message)
-//                    default:
-//                        break
-//            }
-//            case .unreadMessageCountUpdated:
-//                print("2222")
-//            default:
-//                break
-//        }
-        
+        // 单个Conversation的订阅, 主要用在聊天详情页面
         for item in LCClient.eventObserverMap.values {
             item(client, conversation, event)
         }
