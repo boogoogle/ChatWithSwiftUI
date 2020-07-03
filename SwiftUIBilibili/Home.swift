@@ -18,10 +18,23 @@ struct Home: View {
     
     var body: some View {
         ZStack() {
-            DanceGround()
-                .background(Color.white)
-                .animation(.spring())
-                .environmentObject(userData)
+            NavigationView{
+                VStack {
+                    DanceGround()
+                        .background(Color.white)
+                        .animation(.spring())
+                        .environmentObject(userData)
+                }
+            }
+            .navigationBarTitle("广场")
+            .navigationBarItems(
+                leading: Button("left"){print("left clicked")},
+                trailing:MenuRight(show: $showProfile)
+            )
+            
+            
+            
+
             if !userData.hideBottomCardAndMenuBtn {
                 MenuRight(show: $showProfile)
                     .animation(.spring())

@@ -36,17 +36,22 @@ struct LCRest {
                 let convId = withJson["conv-id"].string ?? ""
                 let timestamp = withJson["timestamp"].string ?? ""
                 let from = withJson["from"].string ?? ""
-                
-                let dataJ = JSON(parseJSON: withJson["data"].rawValue as! String)
-                let lcText = dataJ["_lctext"].string ?? ""
-                let lcType = dataJ["_lctype"].int ?? -1
+                var lcType: Int = -1
+                var lcText = ""
                 var imgUrl = ""
                 
-                // 处理图片消息
-                if lcType == -2 {
-                    let lcfileDataJ = dataJ["_lcfile"]
-                    imgUrl = lcfileDataJ["url"].string ?? ""
-                    print(imgUrl, "imgUrl")
+                if let dataRawValue = withJson["data"].rawValue as? String {
+                    let dataJ = JSON(parseJSON: dataRawValue)
+                    lcText = dataJ["_lctext"].string ?? ""
+                    lcType = dataJ["_lctype"].int ?? -1
+                    
+                    // 处理图片消息
+                    if lcType == -2 {
+                        let lcfileDataJ = dataJ["_lcfile"]
+                        imgUrl = lcfileDataJ["url"].string ?? ""
+                        print(imgUrl, "imgUrl")
+                    }
+                    
                 }
                 return MessageFromConvHistoryModel(msgId: msgId, convId: convId, timestamp: timestamp, lcText: lcText,from:from, imgUrl: imgUrl, lcType: lcType)
             }

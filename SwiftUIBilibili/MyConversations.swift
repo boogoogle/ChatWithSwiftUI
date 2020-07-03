@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MyConversations: View {
     var body: some View {
-        DanceGroundBottomCardView().animation(.easeInOut)
+        CreateConversation().animation(.easeInOut)
     }
 }
 

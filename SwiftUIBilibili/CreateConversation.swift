@@ -1,5 +1,5 @@
 //
-//  DanceGroundBottomCardView.swift
+//  CreateConversation.swift
 //  SwiftUIBilibili
 //
 //  Created by Boo on 6/21/20.
@@ -9,7 +9,7 @@
 import SwiftUI
 import LeanCloud
 
-struct DanceGroundBottomCardView: View {
+struct CreateConversation: View {
     @State var friendEmail: String = ""
     @State var showDetail: Bool = false
     @State var convsersationDetail = ConversationDetail()
@@ -94,7 +94,6 @@ struct DanceGroundBottomCardView: View {
 //            guard type(of: conversation) == IMConversation.self, let self = self else {
 //                return
 //            }
-            print("addevent in DanceGroundBottomCardView")
             switch event {
                 case .left(byClientID: _, at: _):
                     self.handleConversationEventLeft(conversation: conversation, client: client)

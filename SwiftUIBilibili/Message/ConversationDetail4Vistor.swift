@@ -24,6 +24,10 @@ struct ConversationDetail4Vistor: View {
         _ = query.find{result in
             switch result {
                 case .success(objects: let convObjList):
+                    guard convObjList.count > 0 else {
+                        print("未查询到对话\(self.convId)详情: \(convObjList.count)")
+                        break
+                    }
                     self.convDetail = convObjList[0]
                     if let pair:[String] = self.convDetail.get("m")!.arrayValue as? [String] {
                         self.pairName = pair[0] + " & " + pair[1]

@@ -20,6 +20,7 @@ struct DanceGround: View {
     
     func getConversations(){
         let query = LCQuery(className: "_Conversation")
+        
         _ = query.find{result in
             switch result {
                 case .success(objects: let convObjList):
@@ -29,6 +30,11 @@ struct DanceGround: View {
                     print(error)
             }
         }
+//        let params = ["limit": "5",]
+//        LCQueryService.getConversations(params, {result in
+//            self.convObjList = result
+//            self.updateConvList()
+//        })
     }
     func updateConvList(){
         for conv in self.convObjList {
@@ -51,12 +57,14 @@ struct DanceGround: View {
                         // numbered()是后期扩展的; 后面的id,必须用.element.xxx
                         ForEach(viewModel.convHistoryGroup.numbered(), id: \.element.self) { (num, msgList) in
                             VStack{
-                                DanceGroundQuickConvCard(messageList: msgList)
-                                    .gesture(TapGesture().onEnded{
-                                        self.viewModel.hideBottomCardAndMenuBtn = true
-                                        self.selectedConvId = msgList[0].convId
-                                        self.showConvDetail = true
-                                    })
+                                if msgList.count > 0 {
+                                    NavigationLink(destination:  ConversationDetail4Vistor(convId: msgList[0].convId)) {
+                                        DanceGroundQuickConvCard(messageList: msgList)
+                                    }
+                                } else {
+                                    Text("僵尸会话,人去楼空")
+                                }
+                                
                             }
                         }
                         
