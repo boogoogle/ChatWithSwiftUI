@@ -78,21 +78,25 @@ struct BottomTabView: View {
         
     }
     var body: some View {
+        
         TabView {
             Home().tabItem{
                 Image(systemName: "person.3.fill")
                 Text("广场")
             }
+            
             MyConversations()
-            .tabItem {
-                Image(systemName: "quote.bubble.fill")
-                HStack{
-                    Text("我的\(globalData.unreadMessageCount)")
-                }
-                
+                .tabItem {
+                    Image(systemName: "quote.bubble.fill")
+                    Text("我的\(self.globalData.unreadMessageCount)")
             }
+//                    Text("99999\(self.globalData.unreadMessageCount)").foregroundColor(Color.red)
+//                        .offset(x: geo.size.width - 20, y: geo.size.height - 20)
+                
+            
         }.onAppear{
             self.initIMClient()
         }
     }
 }
+
