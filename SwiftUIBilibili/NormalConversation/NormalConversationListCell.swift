@@ -16,12 +16,15 @@ struct NormalConversationListCell: View {
     @State var convName = ""
     @State var members = ""
     @State var time = ""
+    @State var unreadCount = 0
     
     func update(){
         if let categorizedMessage = self.conversation.lastMessage as? IMCategorizedMessage {
             switch categorizedMessage {
                 case is IMTextMessage:
                     self.convLastMessageContentText = categorizedMessage.text ?? "猜猜我说了什么?"
+                case is IMImageMessage:
+                    convLastMessageContentText = categorizedMessage.text ?? "[Image]"
                 default:
                     break
             }
@@ -29,6 +32,7 @@ struct NormalConversationListCell: View {
         self.convName = self.conversation.name ?? "神秘人的神秘对话"
         self.members = self.conversation.members?.stringValue ?? "一个大帅逼"
         self.time = self.conversation.lastMessage?.deliveredDate?.stringValue ?? "not from future"
+        self.unreadCount = self.conversation.unreadMessageCount
     }
     init(conversation: IMConversation){
         self.conversation = conversation
@@ -36,12 +40,20 @@ struct NormalConversationListCell: View {
     
     var body: some View {
         HStack {
-            Text(convName)
-                .font(.title)
-                .foregroundColor(Color.white)
-                .frame(width: 60.0, height: 60.0, alignment: .center)
-                .background(Color.blue)
-                .cornerRadius(30.0)
+            GeometryReader { geometry in
+                Text(self.convName)
+                    .font(.title)
+                    .foregroundColor(Color.white)
+                    .frame(width: 60.0, height: 60.0, alignment: .center)
+                    .background(Color.blue)
+                    .cornerRadius(30.0)
+                if self.unreadCount > 0 {
+                    Text("\(self.unreadCount)")
+                        .bold()
+                        .foregroundColor(Color.red)
+                        .offset(x:geometry.size.width - 8, y: -4)
+                }
+            }.frame(width: 60,height: 60)
             VStack(alignment:.leading) {
                 Text(convName)
                     .font(.subheadline)
@@ -58,3 +70,9 @@ struct NormalConversationListCell: View {
         }
     }
 }
+
+//struct NormalConversationListCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NormalConversationListCell()
+//    }
+//}

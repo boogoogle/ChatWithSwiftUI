@@ -9,7 +9,7 @@
 import SwiftUI
 import LeanCloud
 
-struct CreateConversation: View {
+struct ConversationListPage: View {
     @State var friendEmail: String = ""
     @State var showDetail: Bool = false
     @State var convsersationDetail = ConversationDetail()
@@ -55,12 +55,7 @@ struct CreateConversation: View {
     }
     
     var body: some View {
-            VStack(spacing: 20.0) {
-//                Rectangle()
-//                    .frame(width: 60, height: 6)
-//                    .cornerRadius(3.0)
-//                    .opacity(0.1)
-                
+            VStack() {
                 VStack(alignment: .leading){
                     Text("未读消息: \(self.globalData.unreadMessageCount)")
                     if LCClient.currentConversationList.count > 0 {

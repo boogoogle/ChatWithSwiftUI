@@ -22,13 +22,10 @@
 		F85FDEF8249B44820066E816 /* ConversationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDEF1249B44820066E816 /* ConversationDetail.swift */; };
 		F85FDEF9249B44820066E816 /* ConversationDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDEF3249B44820066E816 /* ConversationDetailData.swift */; };
 		F85FDEFA249B44820066E816 /* MessageInputer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDEF4249B44820066E816 /* MessageInputer.swift */; };
-		F85FDEFE249B44F80066E816 /* NormalConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDEFC249B44F80066E816 /* NormalConversationListView.swift */; };
 		F85FDEFF249B44F80066E816 /* NormalConversationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDEFD249B44F80066E816 /* NormalConversationListCell.swift */; };
 		F85FDF04249B454C0066E816 /* MessageFromConvHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDF01249B454C0066E816 /* MessageFromConvHistoryModel.swift */; };
-		F85FDF05249B454C0066E816 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDF02249B454C0066E816 /* Data.swift */; };
-		F85FDF06249B454C0066E816 /* NormalConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDF03249B454C0066E816 /* NormalConversationModel.swift */; };
 		F85FDF09249B45720066E816 /* conversationListData.json in Resources */ = {isa = PBXBuildFile; fileRef = F85FDF08249B45720066E816 /* conversationListData.json */; };
-		F8813F35249F393600E4201D /* CreateConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F34249F393600E4201D /* CreateConversation.swift */; };
+		F8813F35249F393600E4201D /* ConversationListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F34249F393600E4201D /* ConversationListPage.swift */; };
 		F8813F5724A1CEB300E4201D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F5624A1CEB200E4201D /* NetworkManager.swift */; };
 		F8813F5924A1D08400E4201D /* DeviceDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F5824A1D08400E4201D /* DeviceDefine.swift */; };
 		F8813F5C24A1D6C700E4201D /* LCRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F5B24A1D6C700E4201D /* LCRest.swift */; };
@@ -76,13 +73,10 @@
 		F85FDEF1249B44820066E816 /* ConversationDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationDetail.swift; sourceTree = "<group>"; };
 		F85FDEF3249B44820066E816 /* ConversationDetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationDetailData.swift; sourceTree = "<group>"; };
 		F85FDEF4249B44820066E816 /* MessageInputer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputer.swift; sourceTree = "<group>"; };
-		F85FDEFC249B44F80066E816 /* NormalConversationListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalConversationListView.swift; sourceTree = "<group>"; };
 		F85FDEFD249B44F80066E816 /* NormalConversationListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalConversationListCell.swift; sourceTree = "<group>"; };
 		F85FDF01249B454C0066E816 /* MessageFromConvHistoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageFromConvHistoryModel.swift; sourceTree = "<group>"; };
-		F85FDF02249B454C0066E816 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		F85FDF03249B454C0066E816 /* NormalConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalConversationModel.swift; sourceTree = "<group>"; };
 		F85FDF08249B45720066E816 /* conversationListData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = conversationListData.json; sourceTree = "<group>"; };
-		F8813F34249F393600E4201D /* CreateConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateConversation.swift; sourceTree = "<group>"; };
+		F8813F34249F393600E4201D /* ConversationListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListPage.swift; sourceTree = "<group>"; };
 		F8813F5624A1CEB200E4201D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F8813F5824A1D08400E4201D /* DeviceDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDefine.swift; sourceTree = "<group>"; };
 		F8813F5B24A1D6C700E4201D /* LCRest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LCRest.swift; sourceTree = "<group>"; };
@@ -190,7 +184,6 @@
 		F85FDEFB249B44F80066E816 /* NormalConversation */ = {
 			isa = PBXGroup;
 			children = (
-				F85FDEFC249B44F80066E816 /* NormalConversationListView.swift */,
 				F85FDEFD249B44F80066E816 /* NormalConversationListCell.swift */,
 			);
 			path = NormalConversation;
@@ -199,8 +192,6 @@
 		F85FDF00249B454C0066E816 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F85FDF02249B454C0066E816 /* Data.swift */,
-				F85FDF03249B454C0066E816 /* NormalConversationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -322,7 +313,7 @@
 				F84A4125249A02900044D50D /* LoadingView.swift */,
 				F84A412B249A07020044D50D /* SuccessView.swift */,
 				F84A4129249A046B0044D50D /* CartoonView.swift */,
-				F8813F34249F393600E4201D /* CreateConversation.swift */,
+				F8813F34249F393600E4201D /* ConversationListPage.swift */,
 				F8D229A824ADFAF8001F7EAB /* BottomTabView.swift */,
 				F8D229AA24ADFC97001F7EAB /* MyConversations.swift */,
 			);
@@ -457,19 +448,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F85FDF06249B454C0066E816 /* NormalConversationModel.swift in Sources */,
 				F8A19C882498BD8E004056D1 /* AppDelegate.swift in Sources */,
 				F8A19C8A2498BD8E004056D1 /* SceneDelegate.swift in Sources */,
 				F8813F5C24A1D6C700E4201D /* LCRest.swift in Sources */,
-				F85FDEFE249B44F80066E816 /* NormalConversationListView.swift in Sources */,
 				F8A19C9C2498BDB2004056D1 /* LoginView.swift in Sources */,
 				F8D229AF24AF1806001F7EAB /* GlobalData.swift in Sources */,
 				F85FDEF9249B44820066E816 /* ConversationDetailData.swift in Sources */,
-				F85FDF05249B454C0066E816 /* Data.swift in Sources */,
 				F8A19C8C2498BD8E004056D1 /* ContentView.swift in Sources */,
 				F85FDEFF249B44F80066E816 /* NormalConversationListCell.swift in Sources */,
 				F8D229A524AB595B001F7EAB /* ConversationDetail4Vistor.swift in Sources */,
-				F8813F35249F393600E4201D /* CreateConversation.swift in Sources */,
+				F8813F35249F393600E4201D /* ConversationListPage.swift in Sources */,
 				F85FDEFA249B44820066E816 /* MessageInputer.swift in Sources */,
 				F85FDEE7249A0FC60066E816 /* BlurView.swift in Sources */,
 				F8A19CA12498BDF6004056D1 /* Home.swift in Sources */,

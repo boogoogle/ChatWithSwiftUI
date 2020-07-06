@@ -40,11 +40,14 @@ struct ConversationDetail: View {
     }
     
     func handleMessageReceived(message: IMMessage){
-        dPrint("------ message received ----------111", message)
-        self.conversationDetainData.messages.append(message)
+//        self.conversation.read(message: message)
+        mainQueueExecuting {
+            self.conversationDetainData.messages.append(message)
+        }
+        
     }
     func handleMessageUpdated(updatedMessage: IMMessage){
-        dPrint("------ message updated ----------111", updatedMessage)
+//        dPrint("------ message updated ----------111", updatedMessage)
     }
     
     func queryMessageHistory(isFirst: Bool, completion: @escaping((Result<Bool, Error>) -> Void) ){
@@ -67,7 +70,7 @@ struct ConversationDetail: View {
                 switch result {
                     case .success(value: let messageResults):
                         if isFirst {
-//                            self.conversation.read() // 测试期间,先不用
+                            self.conversation.read()
                         }
                         if !messageResults.isEmpty {
                             mainQueueExecuting {

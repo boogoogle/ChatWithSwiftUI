@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MyConversations: View {
     var body: some View {
-        CreateConversation().animation(.easeInOut)
+        ConversationListPage().animation(.easeInOut)
     }
 }
 
