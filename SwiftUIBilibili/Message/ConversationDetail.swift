@@ -15,7 +15,6 @@ struct ConversationDetail: View {
     @State var isInputerFocus = false
     @State var textMsg =  ""
     @State var conversation:  IMConversation! = LCClient.currentConversation
-    @State var messages = [IMMessage]()
     
     let uuid = UUID().uuidString
     
@@ -42,25 +41,67 @@ struct ConversationDetail: View {
     
     func handleMessageReceived(message: IMMessage){
         dPrint("------ message received ----------111", message)
-        self.messages.append(message)
+        self.conversationDetainData.messages.append(message)
     }
     func handleMessageUpdated(updatedMessage: IMMessage){
         dPrint("------ message updated ----------111", updatedMessage)
     }
     
-    func queryMessageHistory(){
+    func queryMessageHistory(isFirst: Bool, completion: @escaping((Result<Bool, Error>) -> Void) ){
+        var start: IMConversation.MessageQueryEndpoint? = nil
+        
+        if let oldMessage = self.conversationDetainData.messages.first {
+            start = IMConversation.MessageQueryEndpoint(
+                messageID: oldMessage.ID,
+                sentTimestamp: oldMessage.sentTimestamp,
+                isClosed: true
+            )
+        }
+        
         do {
-            try conversation.queryMessage(limit: 15) { (result) in
+            try conversation.queryMessage(
+                start: start,
+                policy: isFirst ? .onlyNetwork : .default
+//                limit: 15
+            ) { (result) in
                 switch result {
-                    case .success(value: let messages):
-//                        self.conversationDetainData.messages = messages
-                        self.messages = messages
-//                        print(messages)
+                    case .success(value: let messageResults):
+                        if isFirst {
+//                            self.conversation.read() // 测试期间,先不用
+                        }
+                        if !messageResults.isEmpty {
+                            mainQueueExecuting {
+                                let isOriginMessageEmpty = self.conversationDetainData.messages.isEmpty // scroll的时候判断是滚动到底部还是第一条消息
+                                if
+                                    let first = self.conversationDetainData.messages.first,
+                                    let last = messageResults.last,
+                                    let firstTimestamp = first.sentTimestamp,
+                                    let lastTimestamp = last.sentTimestamp,
+                                    firstTimestamp == lastTimestamp,
+                                    let firstMessageID = first.ID,
+                                    let lastMessageID = last.ID,
+                                    firstMessageID == lastMessageID
+                                {
+                                    self.conversationDetainData.messages.removeFirst()
+                                }
+                                self.conversationDetainData.messages.insert(contentsOf: messageResults, at: 0)
+                                
+//                                self.tableView.reloadData()// 更新ui
+//                                self.tableView.scrollToRow( // 滚动到底部
+//                                    at: IndexPath(row: messageResults.count - 1, section: 0),
+//                                    at: isOriginMessageEmpty ? .bottom : .top,
+//                                    animated: false
+//                                )
+                            }
+                        }
+                        completion(.success(true))
                     case .failure(error: let error):
                         print(error)
+                        completion(.failure(error))
                 }
             }
         } catch {
+            completion(.failure(error))
             print(error)
         }
     }
@@ -83,13 +124,13 @@ struct ConversationDetail: View {
                 VStack {
                     Text(conversation.name ?? "_")
                     Text("未读消息: \(self.conversation.unreadMessageCount)")
-                    List(messages, id: \.ID){ (msg: IMMessage) in
+                    List(conversationDetainData.messages, id: \.ID){ (msg: IMMessage) in
                         VStack{
                             MessageWrapper(msg)
                         }
                     }
                     Spacer()
-                    MessageInputer(textMessage: $textMsg, isFocus: $isInputerFocus).environmentObject(self.conversationDetainData)
+                    MessageInputer(conversation: conversation, textMessage: $textMsg, isFocus: $isInputerFocus).environmentObject(self.conversationDetainData)
                 }
             }
         }.onTapGesture {
@@ -100,14 +141,9 @@ struct ConversationDetail: View {
         .onAppear{
             self.conversation = LCClient.currentConversation
             self.addObserverForClient()
-            self.queryMessageHistory()
+            self.queryMessageHistory(isFirst:true){ _ in
+                dPrint("消息加载完毕...☺")
+            }
         }
     }
 }
-
-//struct ConversationDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ConversationDetail()
-//        .environmentObject(ConversationDetailData())
-//    }
-//}

@@ -11,24 +11,24 @@ import Combine
 import LeanCloud
 
 final class ConversationDetailData: ObservableObject {
-    @Published var typingMessage: String = "说点什么吧"
+//    @Published var typingMessage: String = "说点什么吧"
     @Published var messages = [IMMessage]()
-    
-    func sendMsg(message: IMMessage) {
-        do{
-            try LCClient.currentConversation.send(message: message, completion: {[self] (result) in
-                switch result {
-                    case .success:
-                        self.messages.append(message)
-                    case .failure(error: let error):
-                        print(error)
-                }
-                
-            })
-            
-        } catch {
-            print(error)
-        }
-    }
+//
+//    func sendMsg(message: IMMessage) {
+//        do{
+//            try LCClient.currentConversation.send(message: message, completion: {[self] (result) in
+//                switch result {
+//                    case .success:
+//                        self.messages.append(message)
+//                    case .failure(error: let error):
+//                        print(error)
+//                }
+//
+//            })
+//
+//        } catch {
+//            print(error)
+//        }
+//    }
 }
 

@@ -15,9 +15,10 @@ import LeanCloud
 //}
 
 struct MessageInputer: View {
+    var conversation: IMConversation!
     @Binding var textMessage: String
     @Binding var isFocus: Bool
-    @EnvironmentObject private var cdd: ConversationDetailData
+    @EnvironmentObject private var conversationDetailData: ConversationDetailData
     @State var showImagePicker = false
     @State var image: UIImage? = nil
     
@@ -42,7 +43,7 @@ struct MessageInputer: View {
                             if let imageLCUrl = file.url?.value {
                                 if let url = URL(string: imageLCUrl) {
                                     let imImageMessage = IMImageMessage(url: url)
-                                    self.cdd.sendMsg(message: imImageMessage)
+                                    self.send(message: imImageMessage)
                                 }
                         }
                         case .failure(error: let error):
@@ -53,11 +54,27 @@ struct MessageInputer: View {
         } else {
             print(self.$textMessage)
             let imTextMessage = IMTextMessage(text: self.textMessage)
-            self.cdd.sendMsg(message: imTextMessage)
+            self.send(message: imTextMessage)
         }
-        
-        
     }
+    
+    func send(message: IMMessage) {
+        do {
+            try self.conversation.send(message: message, completion: { (result) in
+                switch result {
+                    case .success:
+                        mainQueueExecuting {
+                            self.conversationDetailData.messages.append(message)
+                        }
+                    case .failure(error: let error):
+                            dPrint(error)
+                }
+            })
+        } catch {
+            dPrint(error)
+        }
+    }
+    
     func uploadImage(){
 //        do {
 //            if let imageFilePath = Bundle.main.url(forResource: "image", withExtension: "jpg")?.path {
