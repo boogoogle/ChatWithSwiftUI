@@ -216,7 +216,6 @@ struct LoginView: View {
                     .padding(.bottom, 20)
                 }
             }
-            .clipShape(RoundedRectangle(cornerRadius: 30, style:.continuous))
             .offset(y: isFocused ? -300 : 0) // 呼出键盘,向上抬起
             .animation(.easeInOut)
             .onTapGesture {
