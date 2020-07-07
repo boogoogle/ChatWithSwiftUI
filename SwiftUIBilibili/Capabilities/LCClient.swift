@@ -40,9 +40,40 @@ extension LCClient: IMClientDelegate {
         for item in LCClient.eventObserverMap.values {
             item(client, conversation, event)
         }
+//        本地消息通知怎么加呢? 还是说这里得用推送?
+        switch event {
+            case .unreadMessageCountUpdated:
+                notify(text: "来自\(String(describing: conversation.name))的消息")
+            default:
+                break
+        }
     }
 }
 // 代理的方式不大好...
 //protocol LCClieentDelegate: class {
 //    func LCClientDidReceiveMessage(_ client: LCClient, receivedMessage: IMMessage)
 //}
+
+
+
+// 本地消息通知
+func notify(text: String){
+    print("notify111",text)
+    // 1
+    let content = UNMutableNotificationContent()
+    content.title = "新消息"
+    content.body = text
+    content.sound = UNNotificationSound.default
+    
+    //2
+    //        let calendar = Calendar(identifier: .gregorian)
+    //        let components = calendar.dateComponents([.month, .day, .hour, .minute], from: Date())
+    
+    // 3
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2,repeats: false)
+    // 4
+    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+    // 5
+    let center = UNUserNotificationCenter.current()
+    center.add(request, withCompletionHandler: nil)
+}

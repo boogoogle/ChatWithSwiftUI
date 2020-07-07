@@ -66,8 +66,8 @@ struct ConversationListPage: View {
                                     LCClient.currentConversation = conv
                                     self.showDetail = true
                             }
-                            .id(UUID()) // 在这里加上id属性,会导致每一条列表项都会刷新一下,不大好,不过暂时没啥好办法
-                        }
+                        }.id(UUID()) // 在这里加上id属性,会导致每一条列表项都会刷新一下,不大好,不过暂时没啥好办法; 不要加到内部条目上!
+                        // 可以 [参考](https://www.hackingwithswift.com/articles/210/how-to-fix-slow-list-updates-in-swiftui)
                     }
                 }
                 
