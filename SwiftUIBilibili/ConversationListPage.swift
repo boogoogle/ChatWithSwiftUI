@@ -58,13 +58,15 @@ struct ConversationListPage: View {
             VStack() {
                 VStack(alignment: .leading){
                     Text("未读消息: \(self.globalData.unreadMessageCount)")
-                    if LCClient.currentConversationList.count > 0 {
-                        List(LCClient.currentConversationList , id: \.ID) { conv in
+                    // TODO 需要改成EnviromentObject,现在不能实时更新啊
+                    if self.globalData.currentConversationList.count > 0 {
+                        List(self.globalData.currentConversationList , id: \.ID) { conv in
                             NormalConversationListCell(conversation: conv)
                                 .onTapGesture {
                                     LCClient.currentConversation = conv
                                     self.showDetail = true
                             }
+                            .id(UUID()) // 在这里加上id属性,会导致每一条列表项都会刷新一下,不大好,不过暂时没啥好办法
                         }
                     }
                 }

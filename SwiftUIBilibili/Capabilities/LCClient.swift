@@ -17,8 +17,6 @@ class LCClient {
     
     static var currentConversation: IMConversation!
     
-    static var currentConversationList = [IMConversation]()
-    
     static var eventObserverMap: [String: (IMClient, IMConversation, IMConversationEvent) -> Void] = [:]
     
     static let queue = DispatchQueue(label: "\(LCClient.self).queue")

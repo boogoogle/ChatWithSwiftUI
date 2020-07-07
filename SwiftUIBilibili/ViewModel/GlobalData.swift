@@ -7,7 +7,9 @@
 //
 
 import SwiftUI
+import LeanCloud
 
 final class GlobalData: ObservableObject {
     @Published var unreadMessageCount = 0
+    @Published var currentConversationList = [IMConversation]()
 }

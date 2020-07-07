@@ -32,6 +32,7 @@ struct BottomTabView: View {
             switch result {
                 case .success:
                     LCClient.current = client
+                    // dPrint("lcclient.current init success")
                     self.addObserverForClient()
                     break
                 case .failure(error: let error):
@@ -60,20 +61,28 @@ struct BottomTabView: View {
     func handleConversationEventLastMessageUpdated(conversation: IMConversation, isNewMessage: Bool) {
 //        print("lastmessageUpdated", isNewMessage)
         var isIn = false
-        for(index,conv) in LCClient.currentConversationList.numbered() {
+        for(index,conv) in self.globalData.currentConversationList.numbered() {
             if(conv.ID == conversation.ID) {
-                LCClient.currentConversationList[index - 1] = conversation
+                mainQueueExecuting {
+                    self.globalData.currentConversationList[index-1] = conversation
+//                    self.globalData.currentConversationList.append(conversation)
+                }
+                
                 isIn = true
                 break
             }
         }
         
         if !isIn {
-            LCClient.currentConversationList.append(conversation)
+            mainQueueExecuting{
+                self.globalData.currentConversationList.append(conversation)
+            }
         }
     }
     func handleConversationEventUnreadMessageCountUpdated(conversation: IMConversation) {
-        self.globalData.unreadMessageCount = conversation.unreadMessageCount
+        mainQueueExecuting {
+            self.globalData.unreadMessageCount = conversation.unreadMessageCount
+        }
         print(conversation.unreadMessageCount, "unread---")
         
     }
@@ -90,7 +99,7 @@ struct BottomTabView: View {
                     Image(systemName: "quote.bubble.fill")
                     Text("我的\(self.globalData.unreadMessageCount)")
             }
-//                     
+//
         }.onAppear{
             self.initIMClient()
         }
