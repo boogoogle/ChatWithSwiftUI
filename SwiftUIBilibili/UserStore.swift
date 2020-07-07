@@ -8,9 +8,6 @@
 
 import LeanCloud
 import SwiftUI
-// 用来保存用户数据,几乎等同于Combine
-
-import SwiftUI
 import Combine
 
 class UserStore: ObservableObject {

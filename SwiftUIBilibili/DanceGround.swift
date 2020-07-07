@@ -19,24 +19,15 @@ struct DanceGround: View {
     @EnvironmentObject var viewModel: UserStore
     
     func getConversations(){
-        let query = LCQuery(className: "_Conversation")
+        let params: Dictionary<String, LCValue> = ["limit": LCNumber(3),]
         
-        _ = query.find{result in
-            switch result {
-                case .success(objects: let convObjList):
-                    self.convObjList = convObjList
-                    self.updateConvList()
-                case .failure(error: let error):
-                    print(error)
-            }
-        }
-//        let params = ["limit": "5",]
-//        LCQueryService.getConversations(params, {result in
-//            self.convObjList = result
-//            self.updateConvList()
-//        })
+        LCQueryService.getConversations(params, {result in
+            self.convObjList = result
+            self.updateConvList()
+        })
     }
     func updateConvList(){
+        self.viewModel.convHistoryGroup = [[MessageFromConvHistoryModel]]()
         for conv in self.convObjList {
             let convId = conv.objectId!.rawValue as! String
             // 使用Conversation的id获取最新的几条消息
@@ -45,6 +36,16 @@ struct DanceGround: View {
                 self.viewModel.convHistoryGroup.append(list)
             })
         }
+    }
+    
+    func getMoreConversation(){
+        let lastConvCreatedAt = (self.convObjList.last?.createdAt)!
+        let params:Dictionary<String, LCValue> = ["lastConvCreatedAt": LCDate(lastConvCreatedAt)]
+        
+        LCQueryService.getConversations(params, {result in
+            self.convObjList += result
+            self.updateConvList()
+        })
     }
     
     var body: some View {
@@ -64,8 +65,12 @@ struct DanceGround: View {
                                 } else {
                                     Text("僵尸会话,人去楼空")
                                 }
-                                
                             }
+                        }
+                        Button(action: {
+                            self.getMoreConversation()
+                        }){
+                            Text("下一组")
                         }
                         
                     }.padding(20)
