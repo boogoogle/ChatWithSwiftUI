@@ -31,7 +31,7 @@ struct ConversationDetail4Vistor: View {
                     self.convDetail = convObjList[0]
                     if let pair:[String] = self.convDetail.get("m")!.arrayValue as? [String] {
                         self.pairName = pair[0] + " & " + pair[1]
-                        print("888888",self.pairName, pair)
+//                        print("888888",self.pairName, pair)
                     }
                 case .failure(error: let error):
                     print(error)

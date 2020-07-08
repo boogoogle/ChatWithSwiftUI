@@ -70,7 +70,7 @@ struct DanceGround: View {
                         Button(action: {
                             self.getMoreConversation()
                         }){
-                            Text("下一组")
+                            Text("更多")
                         }
                         
                     }.padding(20)

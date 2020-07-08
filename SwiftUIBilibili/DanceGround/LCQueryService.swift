@@ -8,26 +8,26 @@
 import LeanCloud
 
 struct LCQueryService {
-    public static var conversationQuery = LCQuery(className: "_Conversation")
+
     
     public static func getConversations(
         _ params: Dictionary<String, LCValue>?,
         _ callback: @escaping(_ result: [LCObject]) -> ()
     ){
-        self.conversationQuery.whereKey("createdAt", .descending)// 降序排列
+        let conversationQuery = LCQuery(className: "_Conversation")
         
-        
+        conversationQuery.whereKey("createdAt", .descending)// 降序排列
         if let limit = params?["limit"] {
-            self.conversationQuery.limit = limit.intValue
+            conversationQuery.limit = limit.intValue
         } else {
-            self.conversationQuery.limit =  2
+            conversationQuery.limit =  2
         }
         
         if let lastConvCreatedAt = params?["lastConvCreatedAt"] {
-            self.conversationQuery.whereKey("createdAt", .lessThan(lastConvCreatedAt as! LCDate))
+            conversationQuery.whereKey("createdAt", .lessThan(lastConvCreatedAt as! LCDate))
         }
         
-        _ = self.conversationQuery.find{result in
+        _ = conversationQuery.find{result in
             switch result {
                 case .success(objects: let convObjList):
                     callback(convObjList)
