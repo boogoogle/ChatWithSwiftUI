@@ -37,7 +37,6 @@
 		F8813F6D24A3625500E4201D /* ImageMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8813F6C24A3625500E4201D /* ImageMessageCell.swift */; };
 		F8A19C882498BD8E004056D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C872498BD8E004056D1 /* AppDelegate.swift */; };
 		F8A19C8A2498BD8E004056D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C892498BD8E004056D1 /* SceneDelegate.swift */; };
-		F8A19C8C2498BD8E004056D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C8B2498BD8E004056D1 /* ContentView.swift */; };
 		F8A19C8E2498BD92004056D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8A19C8D2498BD92004056D1 /* Assets.xcassets */; };
 		F8A19C912498BD92004056D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8A19C902498BD92004056D1 /* Preview Assets.xcassets */; };
 		F8A19C942498BD92004056D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8A19C922498BD92004056D1 /* LaunchScreen.storyboard */; };
@@ -89,7 +88,6 @@
 		F8A19C842498BD8E004056D1 /* SwiftUIBilibili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIBilibili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8A19C872498BD8E004056D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8A19C892498BD8E004056D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F8A19C8B2498BD8E004056D1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F8A19C8D2498BD92004056D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8A19C902498BD92004056D1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F8A19C932498BD92004056D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -300,7 +298,6 @@
 				F8A19C9D2498BDE6004056D1 /* DanceGround.swift */,
 				F8A19C872498BD8E004056D1 /* AppDelegate.swift */,
 				F8A19C892498BD8E004056D1 /* SceneDelegate.swift */,
-				F8A19C8B2498BD8E004056D1 /* ContentView.swift */,
 				F8A19C8D2498BD92004056D1 /* Assets.xcassets */,
 				F84A411E2499FE7D0044D50D /* Lottie */,
 				F8A19C922498BD92004056D1 /* LaunchScreen.storyboard */,
@@ -454,7 +451,6 @@
 				F8A19C9C2498BDB2004056D1 /* LoginView.swift in Sources */,
 				F8D229AF24AF1806001F7EAB /* GlobalData.swift in Sources */,
 				F85FDEF9249B44820066E816 /* ConversationDetailData.swift in Sources */,
-				F8A19C8C2498BD8E004056D1 /* ContentView.swift in Sources */,
 				F85FDEFF249B44F80066E816 /* NormalConversationListCell.swift in Sources */,
 				F8D229A524AB595B001F7EAB /* ConversationDetail4Vistor.swift in Sources */,
 				F8813F35249F393600E4201D /* ConversationListPage.swift in Sources */,
@@ -534,6 +530,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -595,6 +592,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -623,9 +621,10 @@
 			baseConfigurationReference = 11DE0675FB5A2666552645DD /* Pods-SwiftUIBilibili.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIBilibili/Preview Content\"";
-				DEVELOPMENT_TEAM = F4R4895LC2;
+				DEVELOPMENT_TEAM = 9X984HZGN8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SwiftUIBilibili/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -644,9 +643,10 @@
 			baseConfigurationReference = 3F5DAC20679CAB6D06B12CD8 /* Pods-SwiftUIBilibili.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIBilibili/Preview Content\"";
-				DEVELOPMENT_TEAM = F4R4895LC2;
+				DEVELOPMENT_TEAM = 9X984HZGN8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SwiftUIBilibili/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

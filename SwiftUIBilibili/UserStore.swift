@@ -22,7 +22,6 @@ class UserStore: ObservableObject {
         }
     }
     @Published var showLogin = false
-    @Published var hideBottomCardAndMenuBtn = false
     @Published var convHistoryGroup = [[MessageFromConvHistoryModel]]()
 }
 

@@ -21,7 +21,7 @@ struct Home: View {
             NavigationView{
                 VStack {
                     DanceGround()
-                        .background(Color.white)
+                        .background(Color(UIColor(named: "BgColor")!))
                         .animation(.spring())
                         .environmentObject(userData)
                 }
@@ -32,11 +32,11 @@ struct Home: View {
                 trailing:MenuRight(show: $showProfile)
             )
             
-            if !userData.hideBottomCardAndMenuBtn {
-                MenuRight(show: $showProfile)
-                    .animation(.spring())
-                    .offset(x: -30, y:showProfile ? 70 : 30)
-            }
+            
+            MenuRight(show: $showProfile)
+                .animation(.spring())
+                .offset(x: -30, y:showProfile ? 70 : 30)
+            
             if userData.showLogin {
                 ZStack {
                     LoginView()
@@ -177,8 +177,7 @@ struct MenuRight: View {
                         CircleButton(icon: "person.crop.circle")
                     }
                 } else {
-                    Text("未登录")
-                        .foregroundColor(Color.red)
+                    Text("未登录").foregroundColor(Color.red)
                     Button(action: {self.userData.showLogin = true}){
                         CircleButton(icon: "person.crop.circle.badge.exclam")
                     }

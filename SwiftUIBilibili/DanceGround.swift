@@ -50,9 +50,8 @@ struct DanceGround: View {
     
     var body: some View {
         ZStack {
-//            TitleView()
+            Color(UIColor(named: "BgColor")!).edgesIgnoringSafeArea(.all)
             if viewModel.convHistoryGroup.count > 0 {
-                
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                         // numbered()是后期扩展的; 后面的id,必须用.element.xxx
@@ -73,16 +72,14 @@ struct DanceGround: View {
                             Text("更多")
                         }
                         
-                    }.padding(20)
+                    }.frame(maxHeight: .infinity)
                 }
             }
         }
         .onAppear{
             self.getConversations()
         }
-        .sheet(isPresented: $showConvDetail, onDismiss: {
-            self.viewModel.hideBottomCardAndMenuBtn = false
-        }){
+        .sheet(isPresented: $showConvDetail){
             ConversationDetail4Vistor(convId: self.selectedConvId)
         }
     }
