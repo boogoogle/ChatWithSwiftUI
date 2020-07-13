@@ -17,23 +17,68 @@ struct BottomTabView: View {
             if clientId != ""{
                 print("initIMClient, 当前登录用户的Email是: ", clientId)
             }
+            
             let client = try IMClient(
                 ID: clientId,
                 delegate: LCClient.delegator,
                 eventQueue: LCClient.queue
             )
-            self.open(client: client)
+            
+            
+            try client.prepareLocalStorage { (result) in
+                switch result {
+                    case .success:
+                        do {
+                            try client.getAndLoadStoredConversations(completion: { result in
+                                switch result {
+                                    case .success(value: let storedConversations):
+                                        var conversations: [IMConversation] = []
+                                        var serviceConversations: [IMServiceConversation] = []
+                                        for item in storedConversations {
+                                            if type(of: item) == IMConversation.self {
+                                                conversations.append(item)
+                                            } else if let serviceItem = item as? IMServiceConversation {
+                                                serviceConversations.append(serviceItem)
+                                            }
+                                        }
+                                        self.open(
+                                            client: client,
+//                                                isReopen: isReopen,
+                                            storedConversations: (conversations.isEmpty ? nil : conversations),
+                                            storedServiceConversations: (serviceConversations.isEmpty ? nil : serviceConversations)
+                                        )
+                                        break
+                                    case .failure(error: let error):
+                                        dPrint(error)
+                                    }
+                            })
+                        } catch {
+                            dPrint(error)
+                    }
+                    case .failure(error: let error):
+                        dPrint(error)
+                    }
+            }
         } catch {
             print(error)
         }
     }
-    func open(client: IMClient){
-        client.open { (result) in
+    func open(
+        client: IMClient,
+        isReopen: Bool? = false,
+        storedConversations: [IMConversation]? = nil,
+        storedServiceConversations: [IMServiceConversation]? = nil // 这个是啥???订阅号之类的?
+    ){
+        client.open(options: .default){ (result) in
             switch result {
                 case .success:
-                    LCClient.current = client
-                    // dPrint("lcclient.current init success")
-                    self.addObserverForClient()
+                    mainQueueExecuting {
+                        LCClient.current = client
+                        self.globalData.currentConversationList = storedConversations ?? []
+//                        LCClient.storedConversations = storedConversations
+//                        LCClient.storedServiceConversations = storedServiceConversations
+                        self.addObserverForClient()
+                    }
                     break
                 case .failure(error: let error):
                     print(error)

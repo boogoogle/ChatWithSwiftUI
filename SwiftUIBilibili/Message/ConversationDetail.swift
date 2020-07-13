@@ -10,13 +10,17 @@ import SwiftUI
 import LeanCloud
 
 struct ConversationDetail: View {
+    private var conversation:  IMConversation!
     
-    @EnvironmentObject private var conversationDetainData: ConversationDetailData
+    @EnvironmentObject private var conversationDetailData: ConversationDetailData
     @State var isInputerFocus = false
     @State var textMsg =  ""
-    @State var conversation:  IMConversation! = LCClient.currentConversation
+    
     
     let uuid = UUID().uuidString
+    init(conversation: IMConversation!) {
+        self.conversation = conversation
+    }
     
     func addObserverForClient() {
         LCClient.addEventObserver(key: self.uuid, closure: {[self] (client, conversation, event) in
@@ -42,7 +46,7 @@ struct ConversationDetail: View {
     func handleMessageReceived(message: IMMessage){
 //        self.conversation.read(message: message)
         mainQueueExecuting {
-            self.conversationDetainData.messages.append(message)
+            self.conversationDetailData.messages.append(message)
         }
         
     }
@@ -53,7 +57,7 @@ struct ConversationDetail: View {
     func queryMessageHistory(isFirst: Bool, completion: @escaping((Result<Bool, Error>) -> Void) ){
         var start: IMConversation.MessageQueryEndpoint? = nil
         
-        if let oldMessage = self.conversationDetainData.messages.first {
+        if let oldMessage = self.conversationDetailData.messages.first {
             start = IMConversation.MessageQueryEndpoint(
                 messageID: oldMessage.ID,
                 sentTimestamp: oldMessage.sentTimestamp,
@@ -62,6 +66,9 @@ struct ConversationDetail: View {
         }
         
         do {
+            guard conversation != nil else {
+                return
+            }
             try conversation.queryMessage(
                 start: start,
                 policy: isFirst ? .onlyNetwork : .default
@@ -74,9 +81,9 @@ struct ConversationDetail: View {
                         }
                         if !messageResults.isEmpty {
                             mainQueueExecuting {
-                                let isOriginMessageEmpty = self.conversationDetainData.messages.isEmpty // scroll的时候判断是滚动到底部还是第一条消息
+                                let isOriginMessageEmpty = self.conversationDetailData.messages.isEmpty // scroll的时候判断是滚动到底部还是第一条消息
                                 if
-                                    let first = self.conversationDetainData.messages.first,
+                                    let first = self.conversationDetailData.messages.first,
                                     let last = messageResults.last,
                                     let firstTimestamp = first.sentTimestamp,
                                     let lastTimestamp = last.sentTimestamp,
@@ -85,9 +92,9 @@ struct ConversationDetail: View {
                                     let lastMessageID = last.ID,
                                     firstMessageID == lastMessageID
                                 {
-                                    self.conversationDetainData.messages.removeFirst()
+                                    self.conversationDetailData.messages.removeFirst()
                                 }
-                                self.conversationDetainData.messages.insert(contentsOf: messageResults, at: 0)
+                                self.conversationDetailData.messages.insert(contentsOf: messageResults, at: 0)
                                 
 //                                self.tableView.reloadData()// 更新ui
 //                                self.tableView.scrollToRow( // 滚动到底部
@@ -125,24 +132,22 @@ struct ConversationDetail: View {
             Color.white.edgesIgnoringSafeArea(.all) // 没有这个,对于ZStack的onTapGesture不会生效
             if conversation != nil {
                 VStack {
-                    Text(conversation.name ?? "_")
-                    Text("未读消息: \(self.conversation.unreadMessageCount)")
-                    List(conversationDetainData.messages, id: \.ID){ (msg: IMMessage) in
+                    List(conversationDetailData.messages, id: \.ID){ (msg: IMMessage) in
                         VStack{
                             MessageWrapper(msg)
                         }
                     }
                     Spacer()
-                    MessageInputer(conversation: conversation, textMessage: $textMsg, isFocus: $isInputerFocus).environmentObject(self.conversationDetainData)
+                    MessageInputer(conversation: conversation, textMessage: $textMsg, isFocus: $isInputerFocus)
                 }
             }
-        }.onTapGesture {
+        }.navigationBarTitle(conversation.name ?? "和神秘人的神秘对话")
+        .onTapGesture {
             self.isInputerFocus = false
             self.hideKeyboard()
         }
         .offset(y: isInputerFocus ? -300 : 0)
         .onAppear{
-            self.conversation = LCClient.currentConversation
             self.addObserverForClient()
             self.queryMessageHistory(isFirst:true){ _ in
                 dPrint("消息加载完毕...☺")

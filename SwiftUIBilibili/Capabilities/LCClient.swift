@@ -12,7 +12,7 @@ import LeanCloud
 
 class LCClient {
     static var storedConversations: [IMConversation]?
-    
+    static var storedServiceConversations: [IMServiceConversation]?
     static var current: IMClient!
     
     static var currentConversation: IMConversation!
