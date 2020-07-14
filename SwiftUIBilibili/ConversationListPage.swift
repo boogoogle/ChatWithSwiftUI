@@ -12,6 +12,7 @@ import LeanCloud
 struct ConversationListPage: View {
     @State var friendEmail: String = ""
     @State var isShowSheet: Bool = false
+    @State var selectionRouterView: Int? = nil
     @EnvironmentObject var globalData: GlobalData
     
     let screenHeight = UIScreen.main.bounds.height
@@ -41,6 +42,8 @@ struct ConversationListPage: View {
                 switch result {
                     case .success(value: let conversation):
                         LCClient.currentConversation = conversation
+                        self.isShowSheet = false
+                        self.selectionRouterView = 2
                     case .failure(error: let error):
                         print(error)
                         break
@@ -65,6 +68,11 @@ struct ConversationListPage: View {
                                 }.id(UUID()) // 在这里加上id属性,会导致每一条列表项都会刷新一下,不大好,不过暂时没啥好办法; 不要加到内部条目上!
                                 // 可以 [参考](https://www.hackingwithswift.com/articles/210/how-to-fix-slow-list-updates-in-swiftui)
                             }
+                            NavigationLink(destination: ConversationDetail(conversation:LCClient.currentConversation).environmentObject(ConversationDetailData()),
+                                           tag: 2, selection: self.$selectionRouterView
+                            ){
+                                Text("NavigationLink4CreateConversation").opacity(0.0).frame(width:0,height:0)
+                            }
                         }
                     }
                     .navigationBarTitle("我的消息", displayMode: .inline)
@@ -82,10 +90,7 @@ struct ConversationListPage: View {
                                     Button(action:{
                                         self.createNormalConversation()
                                     }){
-                                        NavigationLink(destination: ConversationDetail(conversation: LCClient.currentConversation).environmentObject(ConversationDetailData())){
-                                            Text("发起").foregroundColor(.blue)
-                                        }
-                                        
+                                        Text("发起").foregroundColor(.blue)
                                     }
                                 }
                                 Spacer()

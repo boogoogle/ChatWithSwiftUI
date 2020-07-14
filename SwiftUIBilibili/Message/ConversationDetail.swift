@@ -16,7 +16,6 @@ struct ConversationDetail: View {
     @State var isInputerFocus = false
     @State var textMsg =  ""
     
-    
     let uuid = UUID().uuidString
     init(conversation: IMConversation!) {
         self.conversation = conversation
