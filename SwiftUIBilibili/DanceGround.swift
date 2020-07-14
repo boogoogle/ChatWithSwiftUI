@@ -61,8 +61,6 @@ struct DanceGround: View {
                                     NavigationLink(destination:  ConversationDetail4Vistor(convId: msgList[0].convId)) {
                                         DanceGroundQuickConvCard(messageList: msgList)
                                     }
-                                } else {
-                                    Text("僵尸会话,人去楼空")
                                 }
                             }
                         }
@@ -84,13 +82,6 @@ struct DanceGround: View {
         }
     }
 }
-
-//struct DanceGround_Previews: PreviewProvider {
-//    @State var s = false
-//    static var previews: some View {
-//        DanceGround(hideFlag: $s)
-//    }
-//}
 
 struct CardView: View {
     @Binding var messageList: [MessageFromConvHistoryModel]

@@ -18,7 +18,6 @@ struct ConversationDetail4Vistor: View {
     
     let params = ["limit": "200"]
     func getConvInfo(){
-        dPrint("getConvInfo---")
         let query = LCQuery(className: "_Conversation")
         query.whereKey("objectId", .equalTo(convId))
         _ = query.find{result in
@@ -41,52 +40,47 @@ struct ConversationDetail4Vistor: View {
     func getMessages(){
         LCRest.getConversationHistoryById(id: convId, params: params,callback: {section in
             self.messageList = section
+            print("getMessages", self.messageList)
         })
     }
     var body: some View {
         VStack {
-            VStack{
-                Text("\(pairName)").font(.title)
-//                Text("\(convId)")
-            }
-            
-            ScrollView{
-                ForEach(messageList, id: \.msgId){ m in
-                HStack(alignment: .top) {
-                    Text("\(m.from):")
-                        .font(.subheadline)
-                    
-                    if m.lcType == -1 {
-                        Text(m.lcText)
-                            .font(.body)
-                    }
-                    if (m.imgUrl != ""){
-                        URLImage(
-                            URL(string: m.imgUrl)!,
-                            processors: [ Resize(size: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale) ],
-                            content: {
-                                $0.image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                        }).frame(width: 100.0,height: 100.0)
+//            ScrollView(){
+                List(messageList, id: \.msgId){ m in
+                    HStack(alignment: .top) {
+                        Text("\(m.from):")
+                            .font(.subheadline)
                         
+                        if m.lcType == -1 {
+                            Text(m.lcText)
+                                .font(.body)
+                        }
+                        if (m.imgUrl != ""){
+                            URLImage(
+                                URL(string: m.imgUrl)!,
+                                processors: [ Resize(size: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale) ],
+                                content: {
+                                    $0.image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipped()
+                            }).frame(width: 100.0,height: 100.0)
+                            
+                        }
+                        Spacer()
                     }
-                    Spacer()
+                    .foregroundColor(.black)
+                    .frame(maxWidth: .infinity)
+                    .padding()
                 }
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity)
-                .padding()
             }
-            }
-        }.onAppear{
-            
-        }.onAppear{
+//        }
+        .navigationBarTitle(pairName)
+        .onAppear{
             self.getConvInfo()
             self.getMessages()
         }
-        
-        
+
     }
 }
 

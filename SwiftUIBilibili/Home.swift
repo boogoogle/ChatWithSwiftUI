@@ -17,44 +17,37 @@ struct Home: View {
     
     
     var body: some View {
-        ZStack() {
-            NavigationView{
+        NavigationView{
+            ZStack() {
+            
                 VStack {
                     DanceGround()
                         .background(Color(UIColor(named: "BgColor")!))
                         .animation(.spring())
                         .environmentObject(userData)
                 }
-            }
-            .navigationBarTitle("广场")
-            .navigationBarItems(
-                leading: Button("left"){print("left clicked")},
-                trailing:MenuRight(show: $showProfile)
-            )
-            
-            
-            MenuRight(show: $showProfile)
-                .animation(.spring())
-                .offset(x: -30, y:showProfile ? 70 : 30)
-            
-            if userData.showLogin {
-                ZStack {
-                    LoginView()
-                    VStack {
-                        HStack {
-                            Spacer()
-                            CircleButton(icon: "xmark")
-                                .onTapGesture {
-                                    self.userData.showLogin = false
+                if userData.showLogin {
+                    ZStack {
+                        LoginView()
+                        VStack {
+                            HStack {
+                                Spacer()
+                                CircleButton(icon: "xmark")
+                                    .onTapGesture {
+                                        self.userData.showLogin = false
+                                }
                             }
-                        }
-                        Spacer()
-                    }.padding()
+                            Spacer()
+                        }.padding()
+                    }
+                } else {
+                    MenuView(show: $showProfile) // 通过 $符号实现双向数据绑定
                 }
-            } else {
-                MenuView(show: $showProfile) // 通过 $符号实现双向数据绑定
             }
-            
+            .navigationBarTitle("广场", displayMode: .inline)
+            .navigationBarItems(
+                trailing: MenuRight(show: self.$showProfile)
+            )
         }
     }
 }
@@ -173,13 +166,17 @@ struct MenuRight: View {
             HStack(alignment: .center) {
                 if userData.isLogged {
                     Text(lc_user_email)
-                    Button(action: {self.show.toggle()}){
-                        CircleButton(icon: "person.crop.circle")
+                    Button(action: {
+                        self.show.toggle()
+                        dPrint("\(self.show)")
+                    }){
+//                        CircleButton(icon: "person.crop.circle")
+                        Image(systemName: "person.crop.circle")
                     }
                 } else {
                     Text("未登录").foregroundColor(Color.red)
                     Button(action: {self.userData.showLogin = true}){
-                        CircleButton(icon: "person.crop.circle.badge.exclam")
+                        Image(systemName: "person.crop.circle.badge.exclam")
                     }
                 }
             }
