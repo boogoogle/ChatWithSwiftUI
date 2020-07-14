@@ -19,7 +19,7 @@ struct DanceGround: View {
     @EnvironmentObject var viewModel: UserStore
     
     func getConversations(){
-        let params: Dictionary<String, LCValue> = ["limit": LCNumber(3),]
+        let params: Dictionary<String, LCValue> = ["limit": LCNumber(5)]
         
         LCQueryService.getConversations(params, {result in
             self.convObjList = result
@@ -67,7 +67,7 @@ struct DanceGround: View {
                         Button(action: {
                             self.getMoreConversation()
                         }){
-                            Text("更多")
+                            Text("换一批")
                         }
                         
                     }.frame(maxHeight: .infinity)
