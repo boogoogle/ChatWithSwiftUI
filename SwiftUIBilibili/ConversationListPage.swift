@@ -15,10 +15,18 @@ struct ConversationListPage: View {
     @State var selectionRouterView: Int? = nil
     @EnvironmentObject var globalData: GlobalData
     
+    @State var isShowingToast = false
+    @State var toastText = ""
+    
     let screenHeight = UIScreen.main.bounds.height
     
     func createNormalConversation(){
         print("createNormalConversation -- start")
+        if self.friendEmail == "" {
+            self.toastText = "请输入对方Email!"
+            self.isShowingToast = true
+            return
+        }
         var memberSet = Set<String>()
         memberSet.insert(LCClient.current.ID)
         memberSet.insert(friendEmail)
@@ -96,6 +104,7 @@ struct ConversationListPage: View {
                                 Spacer()
                             }
                             .padding()
+                            .toast(isShowing: self.$isShowingToast, text: Text(self.toastText))
                             
                         }
                     )

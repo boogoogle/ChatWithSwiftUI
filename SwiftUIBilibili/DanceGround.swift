@@ -18,17 +18,19 @@ struct DanceGround: View {
     
     @EnvironmentObject var viewModel: UserStore
     
+    
+    // 刚进入页面,获取第一组conversation
     func getConversations(){
         let params: Dictionary<String, LCValue> = ["limit": LCNumber(5)]
         
         LCQueryService.getConversations(params, {result in
             self.convObjList = result
-            self.updateConvList()
+            self.getConvMessages(result)
         })
     }
-    func updateConvList(){
-        self.viewModel.convHistoryGroup = [[MessageFromConvHistoryModel]]()
-        for conv in self.convObjList {
+    func getConvMessages(_ convGroup: [LCObject]){
+        
+        for conv in convGroup {
             let convId = conv.objectId!.rawValue as! String
             // 使用Conversation的id获取最新的几条消息
             let params = ["limit":"6"]
@@ -43,8 +45,7 @@ struct DanceGround: View {
         let params:Dictionary<String, LCValue> = ["lastConvCreatedAt": LCDate(lastConvCreatedAt)]
         
         LCQueryService.getConversations(params, {result in
-            self.convObjList += result
-            self.updateConvList()
+            self.getConvMessages(result)
         })
     }
     
@@ -67,7 +68,7 @@ struct DanceGround: View {
                         Button(action: {
                             self.getMoreConversation()
                         }){
-                            Text("换一批")
+                            Text("更多")
                         }
                         
                     }.frame(maxHeight: .infinity)

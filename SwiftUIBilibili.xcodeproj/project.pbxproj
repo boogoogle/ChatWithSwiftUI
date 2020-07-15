@@ -43,6 +43,8 @@
 		F8A19C9C2498BDB2004056D1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C9B2498BDB2004056D1 /* LoginView.swift */; };
 		F8A19C9E2498BDE6004056D1 /* DanceGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C9D2498BDE6004056D1 /* DanceGround.swift */; };
 		F8A19CA12498BDF6004056D1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A19C9F2498BDF6004056D1 /* Home.swift */; };
+		F8B2746924BED3A8007A48E0 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2746824BED3A8007A48E0 /* Toast.swift */; };
+		F8B2746C24BED8EC007A48E0 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2746B24BED8EC007A48E0 /* ViewExtensions.swift */; };
 		F8D2299F24A83FCB001F7EAB /* MessageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2299E24A83FCB001F7EAB /* MessageWrapper.swift */; };
 		F8D229A124A8921A001F7EAB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229A024A8921A001F7EAB /* ImagePicker.swift */; };
 		F8D229A524AB595B001F7EAB /* ConversationDetail4Vistor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D229A424AB595A001F7EAB /* ConversationDetail4Vistor.swift */; };
@@ -95,6 +97,8 @@
 		F8A19C9B2498BDB2004056D1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F8A19C9D2498BDE6004056D1 /* DanceGround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanceGround.swift; sourceTree = "<group>"; };
 		F8A19C9F2498BDF6004056D1 /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		F8B2746824BED3A8007A48E0 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		F8B2746B24BED8EC007A48E0 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		F8D2299E24A83FCB001F7EAB /* MessageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageWrapper.swift; sourceTree = "<group>"; };
 		F8D229A024A8921A001F7EAB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F8D229A424AB595A001F7EAB /* ConversationDetail4Vistor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetail4Vistor.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 		F8A19C862498BD8E004056D1 /* SwiftUIBilibili */ = {
 			isa = PBXGroup;
 			children = (
+				F8B2746724BED383007A48E0 /* Components */,
 				F8813F6524A329FD00E4201D /* DanceGround */,
 				F8813F6224A2074900E4201D /* Extensions */,
 				F8813F5F24A1FE2300E4201D /* ViewModel */,
@@ -323,6 +328,15 @@
 				F8A19C902498BD92004056D1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F8B2746724BED383007A48E0 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F8B2746824BED3A8007A48E0 /* Toast.swift */,
+				F8B2746B24BED8EC007A48E0 /* ViewExtensions.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,6 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8B2746924BED3A8007A48E0 /* Toast.swift in Sources */,
 				F8A19C882498BD8E004056D1 /* AppDelegate.swift in Sources */,
 				F8A19C8A2498BD8E004056D1 /* SceneDelegate.swift in Sources */,
 				F8813F5C24A1D6C700E4201D /* LCRest.swift in Sources */,
@@ -474,6 +489,7 @@
 				F85FDF04249B454C0066E816 /* MessageFromConvHistoryModel.swift in Sources */,
 				F8813F6B24A35E7700E4201D /* SwiftExtension.swift in Sources */,
 				F84A4126249A02900044D50D /* LoadingView.swift in Sources */,
+				F8B2746C24BED8EC007A48E0 /* ViewExtensions.swift in Sources */,
 				F8D229AD24AF02B5001F7EAB /* LCQueryService.swift in Sources */,
 				F8813F6424A2076000E4201D /* LeanCloudExtension.swift in Sources */,
 				F84A412A249A046B0044D50D /* CartoonView.swift in Sources */,

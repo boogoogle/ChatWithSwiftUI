@@ -16,21 +16,15 @@ struct ConversationDetail4Vistor: View {
     @State var convDetail = LCObject()
     @State var pairName = ""
     
-    let params = ["limit": "200"]
     func getConvInfo(){
         let query = LCQuery(className: "_Conversation")
         query.whereKey("objectId", .equalTo(convId))
-        _ = query.find{result in
+        _ = query.getFirst{result in
             switch result {
-                case .success(objects: let convObjList):
-                    guard convObjList.count > 0 else {
-                        print("未查询到对话\(self.convId)详情: \(convObjList.count)")
-                        break
-                    }
-                    self.convDetail = convObjList[0]
+                case .success(object: let convObj):
+                    self.convDetail = convObj
                     if let pair:[String] = self.convDetail.get("m")!.arrayValue as? [String] {
                         self.pairName = pair[0] + " & " + pair[1]
-//                        print("888888",self.pairName, pair)
                     }
                 case .failure(error: let error):
                     print(error)
@@ -38,6 +32,7 @@ struct ConversationDetail4Vistor: View {
         }
     }
     func getMessages(){
+        let params = ["limit": "200"]
         LCRest.getConversationHistoryById(id: convId, params: params,callback: {section in
             self.messageList = section
             print("getMessages", self.messageList)
