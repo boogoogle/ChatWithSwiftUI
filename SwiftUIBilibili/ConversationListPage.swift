@@ -112,6 +112,6 @@ struct ConversationListPage: View {
                 }
                 .frame(minWidth: 0, maxWidth: .infinity) // 使之宽度全屏
                 .background(Color.white)// 这里不设置background,下面的shadow看不出来
-        }
+            }
     }
 }

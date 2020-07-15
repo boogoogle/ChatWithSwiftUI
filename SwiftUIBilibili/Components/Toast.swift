@@ -35,7 +35,6 @@ struct Toast<Presenting>: View where Presenting: View {
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 self.isShowing = false
-                                print("dispearrrr")
                             }
                     }
                     .opacity(self.isShowing ? 1 : 0)

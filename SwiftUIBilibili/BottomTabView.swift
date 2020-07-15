@@ -24,7 +24,6 @@ struct BottomTabView: View {
                 eventQueue: LCClient.queue
             )
             
-            
             try client.prepareLocalStorage { (result) in
                 switch result {
                     case .success:
@@ -104,13 +103,11 @@ struct BottomTabView: View {
         
     }
     func handleConversationEventLastMessageUpdated(conversation: IMConversation, isNewMessage: Bool) {
-//        print("lastmessageUpdated", isNewMessage)
         var isIn = false
         for(index,conv) in self.globalData.currentConversationList.numbered() {
             if(conv.ID == conversation.ID) {
                 mainQueueExecuting {
                     self.globalData.currentConversationList[index-1] = conversation
-//                    self.globalData.currentConversationList.append(conversation)
                 }
                 
                 isIn = true
@@ -128,8 +125,6 @@ struct BottomTabView: View {
         mainQueueExecuting {
             self.globalData.unreadMessageCount = conversation.unreadMessageCount
         }
-        print(conversation.unreadMessageCount, "unread---")
-        
     }
     var body: some View {
         TabView {
@@ -142,6 +137,7 @@ struct BottomTabView: View {
                     Image(systemName: "quote.bubble.fill")
                     Text("我的\(self.globalData.unreadMessageCount)")
             }
+            
         }
         .onAppear{
             self.initIMClient()

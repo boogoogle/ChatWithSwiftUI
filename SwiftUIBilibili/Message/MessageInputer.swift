@@ -59,15 +59,12 @@ struct MessageInputer: View {
     }
     
     func send(message: IMMessage) {
-        print(self.conversationDetailData.messages.count , "000msgCount")
         do {
             try self.conversation.send(message: message, completion: { (result) in
                 switch result {
                     case .success:
-                        print(self.conversationDetailData.messages.count , "111msgCount")
                         mainQueueExecuting {
                             self.conversationDetailData.messages.append(message)
-                            print(self.conversationDetailData.messages.count , "msgCount")
                         }
                     case .failure(error: let error):
                             dPrint(error)
@@ -112,7 +109,7 @@ struct MessageInputer: View {
                     self.hideKeyboard()
                     self.ensure()
                     self.isFocus = false
-                    print(self.conversationDetailData.messages.count , "tap after msgCount")
+                    self.image = nil
                 }) {
                     Text("Send")
                 }
