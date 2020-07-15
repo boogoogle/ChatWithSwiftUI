@@ -15,42 +15,47 @@ struct DanceGroundQuickConvCard: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            ScrollView{
-                ForEach(messageList, id: \.msgId){ m in
-                    HStack(alignment: .top) {
-                        Text("\(m.from):")
-                            .font(.subheadline)
+            List(messageList, id: \.msgId){ m in
+                HStack(alignment: .top) {
+                    Text("\(m.from):")
+                        .font(.subheadline)
 
-                        if m.lcType == -1 {
-                            Text(m.lcText)
-                                .font(.body)
-                        }
-                        if (m.imgUrl != ""){
-                            URLImage(
-                                URL(string: m.imgUrl)!,
-                                processors: [ Resize(size: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale) ],
-                                content: {
-                                    $0.image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .clipped()
-                            }).frame(width: 100.0,height: 100.0)
-                            
-                        }
-                        Spacer()
+                    if m.lcType == -1 {
+                        Text(m.lcText)
+                            .font(.body)
                     }
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity)
-                    .padding()
+                    if (m.imgUrl != ""){
+                        URLImage(
+                            URL(string: m.imgUrl)!,
+                            processors: [ Resize(size: CGSize(width: 80.0, height: 80.0), scale: UIScreen.main.scale) ],
+                            placeholder: { _ in
+                                Text("loading")
+                            },
+                            content: {
+                                $0.image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+                            }
+                        ).frame(width: 100.0,height: 100.0)
+                        
+                    }
+                    Spacer()
                 }
-                Spacer()
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity)
+                .padding()
             }
+            Spacer()
         }
         .frame(width: 280.0, height: 420.0)
         .padding()
         .background(Color.white)
         .cornerRadius(10)
         .shadow(radius: 20)
+        .onAppear{
+            print(self.messageList[1].imgUrl, "1111")
+        }
     }
 }
 

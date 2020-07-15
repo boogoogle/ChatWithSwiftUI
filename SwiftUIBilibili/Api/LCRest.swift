@@ -49,7 +49,6 @@ struct LCRest {
                     if lcType == -2 {
                         let lcfileDataJ = dataJ["_lcfile"]
                         imgUrl = lcfileDataJ["url"].string ?? ""
-                        print(imgUrl, "imgUrl")
                     }
                     
                 }

@@ -15,6 +15,7 @@ struct DanceGround: View {
     @State var convObjList = [LCObject]()
     @State var showConvDetail = false
     @State var selectedConvId = ""
+    @State var selectionRouterViewTag: Int? = nil
     
     @EnvironmentObject var viewModel: UserStore
     
@@ -42,7 +43,7 @@ struct DanceGround: View {
     
     func getMoreConversation(){
         let lastConvCreatedAt = (self.convObjList.last?.createdAt)!
-        let params:Dictionary<String, LCValue> = ["lastConvCreatedAt": LCDate(lastConvCreatedAt)]
+        let params:Dictionary<String, LCValue> = ["lastConvCreatedAt": LCDate(lastConvCreatedAt), "limit": LCNumber(5)]
         
         LCQueryService.getConversations(params, {result in
             self.getConvMessages(result)
@@ -59,11 +60,20 @@ struct DanceGround: View {
                         ForEach(viewModel.convHistoryGroup.numbered(), id: \.element.self) { (num, msgList) in
                             VStack{
                                 if msgList.count > 0 {
-                                    NavigationLink(destination:  ConversationDetail4Vistor(convId: msgList[0].convId)) {
                                         DanceGroundQuickConvCard(messageList: msgList)
-                                    }
+                                            .onTapGesture {
+                                                self.selectedConvId = msgList[0].convId
+                                                self.selectionRouterViewTag = 1
+                                            }
                                 }
                             }
+                        }
+                        
+                        NavigationLink(
+                            destination: ConversationDetail4Vistor(convId: selectedConvId),
+                                       tag: 1,
+                                       selection: self.$selectionRouterViewTag) {
+                             Text("NavigationLink4CreateConversation").opacity(0.0).frame(width:0,height:0)
                         }
                         Button(action: {
                             self.getMoreConversation()
@@ -78,37 +88,5 @@ struct DanceGround: View {
         .onAppear{
             self.getConversations()
         }
-        .sheet(isPresented: $showConvDetail){
-            ConversationDetail4Vistor(convId: self.selectedConvId)
-        }
     }
 }
-
-struct CardView: View {
-    @Binding var messageList: [MessageFromConvHistoryModel]
-
-    var body: some View {
-        VStack(){
-            ForEach(messageList, id: \.msgId){ m in
-                Text(m.lcText)
-            }
-        }
-        .frame(width: 300.0, height: 220.0)
-        .background(Color.blue)
-        .cornerRadius(10)
-        .shadow(radius: 20)
-    }
-}
-
-struct TitleView: View {
-    var body: some View {
-        VStack{
-            Text("Amazing happening")
-                .font(.largeTitle)
-                .fontWeight(.heavy)
-            Spacer()
-        }
-    }
-}
-
-

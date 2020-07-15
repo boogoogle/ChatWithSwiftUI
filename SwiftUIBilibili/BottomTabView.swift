@@ -11,6 +11,7 @@ import LeanCloud
 
 struct BottomTabView: View {
     @EnvironmentObject var globalData: GlobalData
+    @State var currentTab = "home"  // my
     func initIMClient(){
         do {
             let clientId: String = LCApplication.default.currentUser?.email!.rawValue as? String ?? ""
@@ -127,19 +128,41 @@ struct BottomTabView: View {
         }
     }
     var body: some View {
-        TabView {
-            Home().tabItem{
-                Image(systemName: "person.3.fill")
-                Text("广场")
-            }
-            MyConversations()
-                .tabItem {
-                    Image(systemName: "quote.bubble.fill")
-                    Text("我的\(self.globalData.unreadMessageCount)")
+        VStack {
+            if currentTab == "home" {
+                Home()
+            } else {
+                MyConversations()
             }
             
-        }
-        .onAppear{
+            HStack {
+                Spacer()
+                VStack{
+                    Image(systemName: "person.3.fill")
+                    Text("广场")
+                }
+                .foregroundColor(currentTab == "home" ? .blue : .gray)
+                .onTapGesture {
+                    self.currentTab = "home"
+                }
+                Spacer()
+                    HStack(alignment: .top){
+                        VStack {
+                            Image(systemName: "quote.bubble.fill")
+                            Text("我的")
+                        }
+                        if self.globalData.unreadMessageCount > 0 {
+                            Text("\(self.globalData.unreadMessageCount)").foregroundColor(.red)
+                        }
+                    }
+                    .frame(width: 60, height: 36)
+                    .foregroundColor(self.currentTab == "my" ? .blue : .gray)
+                    .onTapGesture {
+                        self.currentTab = "my"
+                    }
+                Spacer()
+            }.font(.system(size: 14.0))
+        }.onAppear{
             self.initIMClient()
         }
     }
