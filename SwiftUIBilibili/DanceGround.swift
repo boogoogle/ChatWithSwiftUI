@@ -18,6 +18,7 @@ struct DanceGround: View {
     @State var selectionRouterViewTag: Int? = nil
     
     @EnvironmentObject var viewModel: UserStore
+    @EnvironmentObject var globalData: GlobalData
     
     
     // 刚进入页面,获取第一组conversation
@@ -64,6 +65,7 @@ struct DanceGround: View {
                                             .onTapGesture {
                                                 self.selectedConvId = msgList[0].convId
                                                 self.selectionRouterViewTag = 1
+                                                self.globalData.isShowBottomTab.toggle()
                                             }
                                 }
                             }

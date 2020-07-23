@@ -10,7 +10,4 @@
 
 import SwiftUI
 struct ApiByLCQuery {
-//    getConversationInfoById(id: String, _ callback: ) -> {
-//
-//    }
 }

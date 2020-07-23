@@ -28,7 +28,7 @@ struct ConversationListPage: View {
             return
         }
         var memberSet = Set<String>()
-        memberSet.insert(LCClient.current.ID)
+        memberSet.insert(LCClient.currentIMClient.ID)
         memberSet.insert(friendEmail)
         guard memberSet.count > 1 else {
             return
@@ -46,7 +46,7 @@ struct ConversationListPage: View {
         }()
         
         do {
-            try LCClient.current.createConversation(clientIDs: memberSet, name: name, completion: {(result) in
+            try LCClient.currentIMClient.createConversation(clientIDs: memberSet, name: name, completion: {(result) in
                 switch result {
                     case .success(value: let conversation):
                         LCClient.currentConversation = conversation

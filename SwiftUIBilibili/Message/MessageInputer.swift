@@ -76,21 +76,6 @@ struct MessageInputer: View {
     }
     
     func uploadImage(){
-//        do {
-//            if let imageFilePath = Bundle.main.url(forResource: "image", withExtension: "jpg")?.path {
-//                let imageMessage = IMImageMessage(filePath: imageFilePath, format: "jpg")
-//                try LCClient.currentConversation.send(message: imageMessage, completion: { (result) in
-//                    switch result {
-//                        case .success:
-//                            break
-//                        case .failure(error: let error):
-//                            print(error)
-//                    }
-//                })
-//            }
-//        } catch {
-//            print(error)
-//        }
     }
     var body: some View {
         VStack {

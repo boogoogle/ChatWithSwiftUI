@@ -11,10 +11,12 @@ import URLImage
 import LeanCloud
 
 struct ConversationDetail4Vistor: View {
+    
     var convId: String = ""
     @State var messageList = [MessageFromConvHistoryModel]()
     @State var convDetail = LCObject()
     @State var pairName = ""
+    @EnvironmentObject var globalData: GlobalData
     
     func getConvInfo(){
         let query = LCQuery(className: "_Conversation")
@@ -40,7 +42,6 @@ struct ConversationDetail4Vistor: View {
     }
     var body: some View {
         VStack {
-//            ScrollView(){
                 List(messageList, id: \.msgId){ m in
                     HStack(alignment: .top) {
                         Text("\(m.from):")
@@ -65,15 +66,16 @@ struct ConversationDetail4Vistor: View {
                         Spacer()
                     }
                     .foregroundColor(.black)
-                    .frame(maxWidth: .infinity)
                     .padding()
                 }
             }
-//        }
         .navigationBarTitle(pairName)
         .onAppear{
             self.getConvInfo()
             self.getMessages()
+        }
+        .onDisappear{
+            self.globalData.isShowBottomTab.toggle()
         }
 
     }

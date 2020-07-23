@@ -53,9 +53,6 @@ struct DanceGroundQuickConvCard: View {
         .background(Color.white)
         .cornerRadius(10)
         .shadow(radius: 20)
-        .onAppear{
-            print(self.messageList[1].imgUrl, "1111")
-        }
     }
 }
 

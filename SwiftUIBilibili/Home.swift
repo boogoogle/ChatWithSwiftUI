@@ -46,7 +46,7 @@ struct Home: View {
             }
             .navigationBarTitle("广场", displayMode: .inline)
             .navigationBarItems(
-                trailing: MenuRight(show: self.$showProfile)
+                leading: MenuRight(show: self.$showProfile)
             )
         }
     }
@@ -105,7 +105,7 @@ struct MenuView: View {
         }
         .padding(30)
         .padding(.top, 20)
-        .frame(minWidth:0, maxWidth: .infinity)
+        .frame(width: MAINWIDTH/2, height: MAINHEIGHT)
         .background(Color.white)
         .cornerRadius(30)
         .padding(.trailing, 60)
@@ -165,7 +165,6 @@ struct MenuRight: View {
         ZStack(alignment:.topTrailing) {
             HStack(alignment: .center) {
                 if userData.isLogged {
-                    Text(lc_user_email)
                     Button(action: {
                         self.show.toggle()
                         dPrint("\(self.show)")
@@ -173,11 +172,12 @@ struct MenuRight: View {
 //                        CircleButton(icon: "person.crop.circle")
                         Image(systemName: "person.crop.circle")
                     }
+                    Text(lc_user_email)
                 } else {
-                    Text("未登录").foregroundColor(Color.red)
                     Button(action: {self.userData.showLogin = true}){
                         Image(systemName: "person.crop.circle.badge.exclam")
                     }
+                    Text("未登录").foregroundColor(Color.red)
                 }
             }
             Spacer()

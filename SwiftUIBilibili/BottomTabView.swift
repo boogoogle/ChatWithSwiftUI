@@ -73,7 +73,7 @@ struct BottomTabView: View {
             switch result {
                 case .success:
                     mainQueueExecuting {
-                        LCClient.current = client
+                        LCClient.currentIMClient = client
                         self.globalData.currentConversationList = storedConversations ?? []
 //                        LCClient.storedConversations = storedConversations
 //                        LCClient.storedServiceConversations = storedServiceConversations
@@ -131,22 +131,33 @@ struct BottomTabView: View {
         VStack {
             if currentTab == "home" {
                 Home()
+            } else if currentTab == "diu"{
+              ArbitraryMessageView()
             } else {
                 MyConversations()
             }
-            
-            HStack {
-                Spacer()
-                VStack{
-                    Image(systemName: "person.3.fill")
-                    Text("广场")
-                }
-                .foregroundColor(currentTab == "home" ? .blue : .gray)
-                .onTapGesture {
-                    self.currentTab = "home"
-                }
-                Spacer()
-                    HStack(alignment: .top){
+            if self.globalData.isShowBottomTab {
+                HStack(alignment:.bottom){
+                    Spacer()
+                    VStack{
+                        Image(systemName: "person.3.fill")
+                        Text("广场")
+                    }
+                    .foregroundColor(currentTab == "home" ? .blue : .gray)
+                    .onTapGesture {
+                        self.currentTab = "home"
+                    }
+                    Spacer()
+                    VStack{
+                        Image(systemName: "plus.circle.fill")
+                        Text("发丢")
+                    }
+                    .foregroundColor(currentTab == "diu" ? .blue : .gray)
+                    .onTapGesture {
+                        self.currentTab = "diu"
+                    }
+                    Spacer()
+                    HStack(){
                         VStack {
                             Image(systemName: "quote.bubble.fill")
                             Text("我的")
@@ -160,8 +171,11 @@ struct BottomTabView: View {
                     .onTapGesture {
                         self.currentTab = "my"
                     }
-                Spacer()
-            }.font(.system(size: 14.0))
+                    Spacer()
+                    
+                }
+                .font(.system(size: 14.0))
+            }
         }.onAppear{
             self.initIMClient()
         }

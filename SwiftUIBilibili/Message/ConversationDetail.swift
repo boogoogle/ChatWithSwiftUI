@@ -13,6 +13,7 @@ struct ConversationDetail: View {
     private var conversation:  IMConversation!
     
     @EnvironmentObject private var conversationDetailData: ConversationDetailData
+    @EnvironmentObject var globalData: GlobalData
     @State var isInputerFocus = false
     @State var textMsg =  ""
     
@@ -151,6 +152,8 @@ struct ConversationDetail: View {
             self.queryMessageHistory(isFirst:true){ _ in
                 dPrint("消息加载完毕...☺")
             }
+        }.onDisappear{
+            self.globalData.isShowBottomTab.toggle()
         }
     }
 }
