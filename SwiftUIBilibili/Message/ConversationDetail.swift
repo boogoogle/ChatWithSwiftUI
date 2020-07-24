@@ -153,7 +153,7 @@ struct ConversationDetail: View {
                 dPrint("消息加载完毕...☺")
             }
         }.onDisappear{
-            self.globalData.isShowBottomTab.toggle()
+            self.globalData.isShowBottomTab = true
         }
     }
 }

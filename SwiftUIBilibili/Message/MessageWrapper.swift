@@ -29,11 +29,11 @@ struct MessageWrapper: View {
             
             if !isSelf {
                 Text("Ta")
-                    .font(.title)
+                    .font(.body)
                     .foregroundColor(Color.white)
-                    .frame(width: 60.0, height: 60.0, alignment: .center)
+                    .frame(width: 40.0, height: 40.0, alignment: .center)
                     .background(Color.blue)
-                    .cornerRadius(30.0)
+                    .cornerRadius(20.0)
                 
             }
             
@@ -46,21 +46,16 @@ struct MessageWrapper: View {
             } else {
                 TextMessageCell(message: message as! IMTextMessage, isSelf: isSelf)
             }
-//            VStack(alignment: isSelf ? .trailing : .leading ) {
-//                Text(message.fromClientID ?? "-")
-//                    .font(.title)
-//                Text(message.text ?? "-")
-//            }
             if !isSelf {
                 Spacer()
             }
             if isSelf {
                 Text("Me")
-                    .font(.title)
+                    .font(.body)
                     .foregroundColor(Color.white)
-                    .frame(width: 60.0, height: 60.0, alignment: .center)
+                    .frame(width: 40.0, height: 40.0, alignment: .center)
                     .background(Color.blue)
-                    .cornerRadius(30.0)
+                    .cornerRadius(20.0)
                 
             }
         }

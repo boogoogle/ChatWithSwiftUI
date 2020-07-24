@@ -11,7 +11,7 @@ import LeanCloud
 
 struct BottomTabView: View {
     @EnvironmentObject var globalData: GlobalData
-    @State var currentTab = "home"  // my
+    @State var currentTab = "my"  // my
     func initIMClient(){
         do {
             let clientId: String = LCApplication.default.currentUser?.email!.rawValue as? String ?? ""
@@ -128,56 +128,80 @@ struct BottomTabView: View {
         }
     }
     var body: some View {
-        VStack {
-            if currentTab == "home" {
-                Home()
-            } else if currentTab == "diu"{
-              ArbitraryMessageView()
-            } else {
-                MyConversations()
-            }
-            if self.globalData.isShowBottomTab {
-                HStack(alignment:.bottom){
-                    Spacer()
-                    VStack{
-                        Image(systemName: "person.3.fill")
-                        Text("广场")
-                    }
-                    .foregroundColor(currentTab == "home" ? .blue : .gray)
-                    .onTapGesture {
-                        self.currentTab = "home"
-                    }
-                    Spacer()
-                    VStack{
-                        Image(systemName: "plus.circle.fill")
-                        Text("发丢")
-                    }
-                    .foregroundColor(currentTab == "diu" ? .blue : .gray)
-                    .onTapGesture {
-                        self.currentTab = "diu"
-                    }
-                    Spacer()
-                    HStack(){
-                        VStack {
-                            Image(systemName: "quote.bubble.fill")
-                            Text("我的")
-                        }
-                        if self.globalData.unreadMessageCount > 0 {
-                            Text("\(self.globalData.unreadMessageCount)").foregroundColor(.red)
-                        }
-                    }
-                    .frame(width: 60, height: 36)
-                    .foregroundColor(self.currentTab == "my" ? .blue : .gray)
-                    .onTapGesture {
-                        self.currentTab = "my"
-                    }
-                    Spacer()
-                    
+        ZStack {
+            VStack {
+                if currentTab == "home" {
+                    Home()
+                } else if currentTab == "diu"{
+                    ArbitraryMessageView()
+                } else {
+                    MyConversations()
                 }
-                .font(.system(size: 14.0))
+                if self.globalData.isShowBottomTab {
+                    GeometryReader { geometry in
+                        HStack(alignment:.bottom){
+                            Group {
+                                
+                                VStack{
+                                    Image(systemName: "person.3.fill")
+                                    Text("广场")
+                                }
+                                .frame(width: geometry.size.width / 3)
+                                .foregroundColor(self.currentTab == "home" ? .blue : .gray)
+                                .onTapGesture {
+                                    self.currentTab = "home"
+                                }
+                                
+                                VStack{
+                                    Image(systemName: "plus.circle.fill")
+                                    Text("发丢")
+                                }
+                                .frame(width: geometry.size.width / 3)
+                                .foregroundColor(self.currentTab == "diu" ? .blue : .gray)
+                                .onTapGesture {
+                                    self.currentTab = "diu"
+                                }
+                                
+                                VStack(){
+                                    Image(systemName: "quote.bubble.fill")
+                                    if self.globalData.unreadMessageCount > 0 {
+                                            Text("\(self.globalData.unreadMessageCount)").foregroundColor(.red)
+                                    } else {
+                                        Text("我的")
+                                    }
+                                }
+                                .frame(width: geometry.size.width / 3)
+                                .foregroundColor(self.currentTab == "my" ? .blue : .gray)
+                                .onTapGesture {
+                                    self.currentTab = "my"
+                                }
+                                
+                            }
+                            
+                        }
+                        .font(.system(size: 14.0))
+                    }.frame(height: 60)
+                }
+            }.onAppear{
+                self.initIMClient()
             }
-        }.onAppear{
-            self.initIMClient()
+//            if globalData.showLogin {
+                ZStack{
+                        LoginView()
+                        VStack {
+                            HStack {
+                                Spacer()
+                                CircleButton(icon: "xmark")
+                                    .onTapGesture {
+                                        self.globalData.showLogin = false
+                                }
+                            }
+                            Spacer()
+                        }.padding()
+                }
+                .offset(y: self.globalData.showLogin ? 0 : MAINHEIGHT)
+                .animation(.easeInOut)
+//            }
         }
     }
 }

@@ -17,7 +17,6 @@
 		F84A412A249A046B0044D50D /* CartoonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84A4129249A046B0044D50D /* CartoonView.swift */; };
 		F84A412C249A07020044D50D /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84A412B249A07020044D50D /* SuccessView.swift */; };
 		F85FDEE7249A0FC60066E816 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDEE6249A0FC60066E816 /* BlurView.swift */; };
-		F85FDEE9249A27240066E816 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDEE8249A27240066E816 /* UserStore.swift */; };
 		F85FDEEC249B409A0066E816 /* LCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDEEB249B409A0066E816 /* LCClient.swift */; };
 		F85FDEF5249B44820066E816 /* ConversationDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDEEE249B44820066E816 /* ConversationDetailController.swift */; };
 		F85FDEF7249B44820066E816 /* TextMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FDEF0249B44820066E816 /* TextMessageCell.swift */; };
@@ -71,7 +70,6 @@
 		F84A4129249A046B0044D50D /* CartoonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonView.swift; sourceTree = "<group>"; };
 		F84A412B249A07020044D50D /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
 		F85FDEE6249A0FC60066E816 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
-		F85FDEE8249A27240066E816 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		F85FDEEB249B409A0066E816 /* LCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LCClient.swift; sourceTree = "<group>"; };
 		F85FDEEE249B44820066E816 /* ConversationDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationDetailController.swift; sourceTree = "<group>"; };
 		F85FDEF0249B44820066E816 /* TextMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessageCell.swift; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 				F8A19C952498BD92004056D1 /* Info.plist */,
 				F8A19C8F2498BD92004056D1 /* Preview Content */,
 				F8A19C9B2498BDB2004056D1 /* LoginView.swift */,
-				F85FDEE8249A27240066E816 /* UserStore.swift */,
 				F84A4123249A01040044D50D /* LottieView.swift */,
 				F85FDEE6249A0FC60066E816 /* BlurView.swift */,
 				F84A4125249A02900044D50D /* LoadingView.swift */,
@@ -525,7 +522,6 @@
 				F8D229AD24AF02B5001F7EAB /* LCQueryService.swift in Sources */,
 				F8813F6424A2076000E4201D /* LeanCloudExtension.swift in Sources */,
 				F84A412A249A046B0044D50D /* CartoonView.swift in Sources */,
-				F85FDEE9249A27240066E816 /* UserStore.swift in Sources */,
 				F8813F5924A1D08400E4201D /* DeviceDefine.swift in Sources */,
 				F8D229AB24ADFC97001F7EAB /* MyConversations.swift in Sources */,
 				F85FDEEC249B409A0066E816 /* LCClient.swift in Sources */,

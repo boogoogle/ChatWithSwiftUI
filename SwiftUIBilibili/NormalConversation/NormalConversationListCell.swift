@@ -12,13 +12,17 @@ import LeanCloud
 struct NormalConversationListCell: View {
     var conversation: IMConversation!
     
-    @State var convLastMessageContentText: String = ""
-    @State var convName = ""
-    @State var members = ""
-    @State var time = ""
-    @State var unreadCount = 0
     
-    func update(){
+    // 不能添加@State, 因为@State标志并初始化的属性,会在init后执行
+    var convLastMessageContentText: String = ""
+    var convName = ""
+    var members = ""
+    var time = ""
+    var unreadCount = 0
+    
+    
+    init(conversation: IMConversation){
+        self.conversation = conversation
         if let categorizedMessage = self.conversation.lastMessage as? IMCategorizedMessage {
             switch categorizedMessage {
                 case is IMTextMessage:
@@ -34,26 +38,24 @@ struct NormalConversationListCell: View {
         self.time = self.conversation.lastMessage?.deliveredDate?.stringValue ?? "not from future"
         self.unreadCount = self.conversation.unreadMessageCount
     }
-    init(conversation: IMConversation){
-        self.conversation = conversation
-    }
     
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             GeometryReader { geometry in
                 Text(self.convName)
-                    .font(.title)
+                    .font(.body)
                     .foregroundColor(Color.white)
-                    .frame(width: 60.0, height: 60.0, alignment: .center)
+                    .frame(width: 40.0, height: 40.0, alignment: .center)
                     .background(Color.blue)
-                    .cornerRadius(30.0)
+                    .cornerRadius(20.0)
                 if self.unreadCount > 0 {
                     Text("\(self.unreadCount)")
+                        .font(.system(size: 12))
                         .bold()
                         .foregroundColor(Color.red)
-                        .offset(x:geometry.size.width - 8, y: -4)
+                        .offset(x:geometry.size.width - 8, y: -5)
                 }
-            }.frame(width: 60,height: 60)
+            }.frame(width: 40,height: 40)
             VStack(alignment:.leading) {
                 Text(convName)
                     .font(.subheadline)
@@ -65,8 +67,6 @@ struct NormalConversationListCell: View {
                     .font(.caption)
                 Text("正在发生").font(.system(size: 14.0)) // 一些tag: 聊天状态-活跃 | 多少人在看 | 刚开始 | 男女 | 基友...
             }
-        }.onAppear{
-            self.update()
         }
     }
 }

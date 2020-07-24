@@ -17,7 +17,6 @@ struct DanceGround: View {
     @State var selectedConvId = ""
     @State var selectionRouterViewTag: Int? = nil
     
-    @EnvironmentObject var viewModel: UserStore
     @EnvironmentObject var globalData: GlobalData
     
     
@@ -37,7 +36,7 @@ struct DanceGround: View {
             // 使用Conversation的id获取最新的几条消息
             let params = ["limit":"6"]
             LCRest.getConversationHistoryById(id: convId, params: params, callback: {list in
-                self.viewModel.convHistoryGroup.append(list)
+                self.globalData.convHistoryGroup.append(list)
             })
         }
     }
@@ -54,11 +53,11 @@ struct DanceGround: View {
     var body: some View {
         ZStack {
             Color(UIColor(named: "BgColor")!).edgesIgnoringSafeArea(.all)
-            if viewModel.convHistoryGroup.count > 0 {
+            if globalData.convHistoryGroup.count > 0 {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                         // numbered()是后期扩展的; 后面的id,必须用.element.xxx
-                        ForEach(viewModel.convHistoryGroup.numbered(), id: \.element.self) { (num, msgList) in
+                        ForEach(globalData.convHistoryGroup.numbered(), id: \.element.self) { (num, msgList) in
                             VStack{
                                 if msgList.count > 0 {
                                         DanceGroundQuickConvCard(messageList: msgList)

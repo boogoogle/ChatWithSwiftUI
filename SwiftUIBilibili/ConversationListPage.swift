@@ -14,9 +14,9 @@ struct ConversationListPage: View {
     @State var isShowSheet: Bool = false
     @State var selectionRouterView: Int? = nil
     @EnvironmentObject var globalData: GlobalData
-    
     @State var isShowingToast = false
     @State var toastText = ""
+    @State var selectedConversation: IMConversation?
     
     let screenHeight = UIScreen.main.bounds.height
     
@@ -49,8 +49,12 @@ struct ConversationListPage: View {
             try LCClient.currentIMClient.createConversation(clientIDs: memberSet, name: name, completion: {(result) in
                 switch result {
                     case .success(value: let conversation):
-                        LCClient.currentConversation = conversation
+                        self.selectedConversation = conversation
                         self.isShowSheet = false
+                        mainQueueExecuting {
+                            self.globalData.isShowBottomTab = false
+                        }
+                        
                         self.selectionRouterView = 2
                     case .failure(error: let error):
                         print(error)
@@ -67,16 +71,18 @@ struct ConversationListPage: View {
                 NavigationView {
                     VStack {
                         VStack(alignment: .leading){
-                            //                        Text("未读消息: \(self.globalData.unreadMessageCount)")
                             if self.globalData.currentConversationList.count > 0 {
                                 List(self.globalData.currentConversationList , id: \.ID) { conv in
                                     NavigationLink(destination: ConversationDetail(conversation:conv).environmentObject(ConversationDetailData())){
                                         NormalConversationListCell(conversation: conv)
                                     }
-                                }.id(UUID()) // 在这里加上id属性,会导致每一条列表项都会刷新一下,不大好,不过暂时没啥好办法; 不要加到内部条目上!
-                                // 可以 [参考](https://www.hackingwithswift.com/articles/210/how-to-fix-slow-list-updates-in-swiftui)
+
+                                    
+                                }
                             }
-                            NavigationLink(destination: ConversationDetail(conversation:LCClient.currentConversation).environmentObject(ConversationDetailData()),
+                            
+                            // 新建对话后,跳转到的对话详情页
+                            NavigationLink(destination: ConversationDetail(conversation:self.selectedConversation).environmentObject(ConversationDetailData()),
                                            tag: 2, selection: self.$selectionRouterView
                             ){
                                 Text("NavigationLink4CreateConversation").opacity(0.0).frame(width:0,height:0)
@@ -112,6 +118,8 @@ struct ConversationListPage: View {
                 }
                 .frame(minWidth: 0, maxWidth: .infinity) // 使之宽度全屏
                 .background(Color.white)// 这里不设置background,下面的shadow看不出来
-            }
+            }.onAppear{
+                self.globalData.isShowBottomTab = true
+        }
     }
 }

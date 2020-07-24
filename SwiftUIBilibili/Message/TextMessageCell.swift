@@ -17,8 +17,9 @@ struct TextMessageCell: View {
         
         VStack(alignment: isSelf ? .trailing : .leading ) {
             Text(message.fromClientID ?? "-")
-                .font(.title)
+                .font(.system(size: 14))
             Text(message.text ?? "-")
+                .font(.system(size: 12))
         }
         
     }

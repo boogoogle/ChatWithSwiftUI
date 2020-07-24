@@ -13,40 +13,22 @@ struct Home: View {
     
     @State var show = false // 当前组件的状态
     @State var showProfile = false // 是否显示DanceGround
-    @EnvironmentObject var userData: UserStore
+    @EnvironmentObject var globalData: GlobalData
     
     
     var body: some View {
         NavigationView{
             ZStack() {
-            
                 VStack {
                     DanceGround()
                         .background(Color(UIColor(named: "BgColor")!))
                         .animation(.spring())
-                        .environmentObject(userData)
-                }
-                if userData.showLogin {
-                    ZStack {
-                        LoginView()
-                        VStack {
-                            HStack {
-                                Spacer()
-                                CircleButton(icon: "xmark")
-                                    .onTapGesture {
-                                        self.userData.showLogin = false
-                                }
-                            }
-                            Spacer()
-                        }.padding()
-                    }
-                } else {
-                    MenuView(show: $showProfile) // 通过 $符号实现双向数据绑定
+                        .environmentObject(globalData)
                 }
             }
             .navigationBarTitle("广场", displayMode: .inline)
             .navigationBarItems(
-                leading: MenuRight(show: self.$showProfile)
+                leading: MenuRight()
             )
         }
     }
@@ -54,22 +36,7 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home().environmentObject(UserStore())
-    }
-}
-
-struct MenuRow: View {
-    var image = "creditcard"
-    var text = ""
-    var body: some View {
-        HStack {
-            Image(systemName: image)
-                .imageScale(.medium)
-                .frame(width: 32, height: 32) // 删掉边框,看看效果?
-            Text(text)
-                .font(.headline)
-            Spacer()
-        }
+        Home().environmentObject(GlobalData())
     }
 }
 
@@ -79,45 +46,6 @@ struct Menu: Identifiable {
     var icon: String
 }
 
-let menuData = [
-//    Menu(title: "My Account", icon: "person.crop.circle"),
-//    Menu(title: "Billing", icon: "creditcard"),
-    Menu(title: "Cancel", icon: "arrow.turn.up.left"),
-]
-
-struct MenuView: View {
-    var menu = menuData
-    @Binding var show: Bool   // 从父组件监听状态的改变
-    @EnvironmentObject var userData: UserStore
-    var body: some View {
-        VStack(alignment: .leading) {
-            ForEach(menu) { item in
-                MenuRow(image: item.icon, text: item.title)
-            }
-            MenuRow(image: "arrow.uturn.down", text: "Sign out ")
-                .onTapGesture {
-                    LCUser.logOut()
-                    UserDefaults.standard.set(false, forKey: "isLogged")
-                    self.userData.isLogged = false
-                    self.show = false
-            }
-            Spacer()
-        }
-        .padding(30)
-        .padding(.top, 20)
-        .frame(width: MAINWIDTH/2, height: MAINHEIGHT)
-        .background(Color.white)
-        .cornerRadius(30)
-        .padding(.trailing, 60)
-        .shadow(radius: 20)
-        .rotation3DEffect(Angle(degrees: show ? 0 :30), axis: (x: 0, y: 10, z: 0)) // 这里axis的每个维度,值为1, 10, 100 没啥区别啊???
-        .animation(.easeInOut) // 括号内是动画执行类型,
-        .offset(x: show ? 0 : -MAINWIDTH)
-        .onTapGesture {
-            self.show.toggle()
-        }
-    }
-}
 
 struct CircleButton: View {
     var icon = ""
@@ -133,48 +61,25 @@ struct CircleButton: View {
     }
 }
 
-struct MenuButton: View {
-    @Binding var show: Bool
-    var body: some View {
-        ZStack(alignment:.topLeading) {
-            Button(action: {self.show.toggle()}){
-                HStack {
-                    Spacer()
-                    Image(systemName: "list.dash")
-                        .foregroundColor(.black)
-                }
-                .frame(width: 90, height: 60)
-                .padding(.trailing, 20)
-                .background(Color.white)
-                .cornerRadius(30)
-                .shadow(radius: 10, x: 0, y: 10)
-            }
-            Spacer()
-                .frame(minWidth:0,maxHeight: .infinity)
-        }
-    }
-}
-
 struct MenuRight: View {
-    @Binding var show: Bool
-    @EnvironmentObject var userData: UserStore
+    @State var show: Bool = false
+    @EnvironmentObject var globalData: GlobalData
     
     let lc_user_email: String = LCApplication.default.currentUser?.email!.rawValue as? String ?? "No Email"
     
     var body: some View {
-        ZStack(alignment:.topTrailing) {
+        VStack{
             HStack(alignment: .center) {
-                if userData.isLogged {
+                if globalData.isLogged {
                     Button(action: {
                         self.show.toggle()
-                        dPrint("\(self.show)")
                     }){
 //                        CircleButton(icon: "person.crop.circle")
                         Image(systemName: "person.crop.circle")
                     }
                     Text(lc_user_email)
                 } else {
-                    Button(action: {self.userData.showLogin = true}){
+                    Button(action: {self.globalData.showLogin = true}){
                         Image(systemName: "person.crop.circle.badge.exclam")
                     }
                     Text("未登录").foregroundColor(Color.red)
@@ -182,6 +87,16 @@ struct MenuRight: View {
             }
             Spacer()
                 .frame(minWidth:0,maxHeight: .infinity)
+        }.actionSheet(isPresented: $show){
+            ActionSheet(title:Text("操作"),buttons: [
+                .destructive(Text("退出登录")){
+                    LCUser.logOut()
+                    UserDefaults.standard.set(false, forKey: "isLogged")
+                    self.globalData.isLogged = false
+                    self.show = false
+                },
+                .cancel()
+            ])
         }
     }
 }

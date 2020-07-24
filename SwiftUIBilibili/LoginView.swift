@@ -18,7 +18,7 @@ struct LoginView: View {
     @State var isLoading = false
     @State var isSuccessful = false
     @State var isSignUp = false
-    @EnvironmentObject var user: UserStore
+    @EnvironmentObject var user: GlobalData
     
     func hideKeyboard(){
         /**
@@ -233,12 +233,12 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-//            .previewDevice("iPhone X")
-    }
-}
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LoginView()
+////            .previewDevice("iPhone X")
+//    }
+//}
 
 struct CoverView: View {
     var body: some View {
